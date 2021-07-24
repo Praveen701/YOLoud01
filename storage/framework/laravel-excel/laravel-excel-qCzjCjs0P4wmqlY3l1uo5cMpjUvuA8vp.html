@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="VT3wo06kOD4IQrm0FsZTwjMgjzDo9flyXf19x4qa">
+    <script src="http://127.0.0.1:8000/js/app.js" defer></script>
+    <title>Yoloud</title>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="http://127.0.0.1:8000/css/app.css" rel="stylesheet">
+    <link href="http://127.0.0.1:8000/css/admin.css" rel="stylesheet">
+    <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+    <style>
+        a:hover {
+            text-decoration: none
+        }
+
+    </style>
+</head>
+
+<body class="bg-light">
+    <div id="app">
+                    <nav class="navbar-custom">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars" style="color: red;"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav-custom scroll ulres">
+                        <li class="li-items">
+                            <div class="text-center" style="font-family: 'Aladin',cursive;"><a href="" id="items">
+                                    <h1>YoLoud</h1>
+                                </a></div>
+                        </li>
+                        <li class="li-items">
+                            <a href="/home" id="items"><i class="fas fa-chart-pie" aria-hidden="true"></i> Dashboard</>
+                                </a>
+                        </li>
+                        <li class="li-items">
+                            <a href="#influencer" data-toggle="collapse" id="items" aria-expanded="false"
+                                class="dropdown-toggle"><i class="fas fa-fw fa-boxes"></i> Influencer</a>
+                            <ul class="collapse" style="list-style: none;margin-left:-10px" id="influencer">
+                                <li><a href="/admin/influencer" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> List</a></li>
+                                <li><a href="/admin/influencer/add" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> New Influencer</a></li>
+                                            <li><a href="/admin/influencer/pendinglist" class="drpdwn"><i style="font-size:10px"
+                                                class="far fa-circle" aria-hidden="true"></i>Pending Approval</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="li-items">
+                            <a href="#brand" data-toggle="collapse" id="items" aria-expanded="false"
+                                class="dropdown-toggle"><i class="fas fa-fw fa-boxes"></i> Brand</a>
+                            <ul class="collapse" style="list-style: none;margin-left:-10px" id="brand">
+                                <li><a href="/admin/brand" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> List</a></li>
+                                <li><a href="/admin/brand/add" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> New Brand</a></li>
+                               
+
+                            </ul>
+                        </li>
+                        <li class="li-items">
+                            <a href="#campaign" data-toggle="collapse" id="items" aria-expanded="false"
+                                class="dropdown-toggle"><i class="fas fa-fw fa-boxes"></i> Campaign</a>
+                            <ul class="collapse" style="list-style: none;margin-left:-10px" id="campaign">
+                                <li><a href="/admin/campaign" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> List</a></li>
+                                <li><a href="/admin/campaign/create" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> New Campaign</a></li>
+                               
+
+                            </ul>
+                        </li>
+
+
+                        <li class="li-items">
+                            <a href="#settings" data-toggle="collapse" id="items" aria-expanded="false"
+                                class="dropdown-toggle"><i class="fas fa-fw fa-cogs"></i> Settings</a>
+                            <ul class="collapse" style="list-style: none;margin-left:-10px" id="settings">
+                                <li><a href="/admin/settings/interest" class="drpdwn"><i style="font-size:10px"
+                                            class="far fa-circle" aria-hidden="true"></i> Interest</a></li>
+                                            <li><a href="/admin/settings/language" class="drpdwn"><i style="font-size:10px"
+                                                class="far fa-circle" aria-hidden="true"></i> Language</a></li>
+                            </ul>
+                        </li>
+                        <li class="li-items ">
+                            <a class="nav-links"  id="items" href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out-alt fa-fw" aria-hidden="true"></i>Logout</a>
+                            <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST" class="d-none">
+                                <input type="hidden" name="_token" value="VT3wo06kOD4IQrm0FsZTwjMgjzDo9flyXf19x4qa">                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        
+
+        <main class="py-2 s">
+                                    <div class="container-fluid px-5 align-middle">
+  <a href="/admin/brand/brandexport" class="btn btn-outline-dark float-right ">
+    <i class="fa fa-file-export fa-fw" aria-hidden="true"></i> Export Brand
+    </a>
+    <h2 class="mt-2">Brands</h2>
+         
+     
+    <div class="float-right mt-3">
+      <a href="/admin/brand" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add New Brand</a>
+  </div>
+
+    <form action="/admin/brand" method="GET">
+     <div class="row mt-4">
+   <div class="col-8">
+   
+      <div class="row row-cols-3">
+   <div class="col">
+
+       <div class="form-group has-search">
+  
+   <input type="text" value="" name="id"   class="form-control" placeholder="Search by Id">
+ </div>
+
+   </div>
+   <div class="col">
+            <div class="form-group has-search">
+ 
+   <input type="text"  value="" name="email" class="form-control" placeholder="Search by Email">
+ </div>
+
+   </div>
+   <div class="col">
+            <div class="form-group has-search">
+   
+   <input type="text" value="" name="name"  class="form-control" placeholder="Search by Name">
+ </div>
+
+   </div>
+
+ </div>
+     </div>
+ 
+   <div class="col-4">
+       <div class="row">
+   <div class="col-3">
+         <button type="submit"  class="btn btn-secondary">Search</button>
+   </div>
+   <div class="col-2">
+         <a href="/admin/brand" class="btn btn-outline-dark ">Reset</a>
+   </div>
+   <div class="col">
+
+
+    <button
+    type="button"
+    class="btn btn-primary float-right"
+    data-toggle="modal"
+    data-target="#importdata"
+  >
+    <i class="fas fa-file-import fa-fw"></i> Bulk Upload Brands
+  </button>
+
+   </div>
+
+
+ </div>
+
+     
+     </div>
+    </form>
+ </div>
+
+
+   <table  class="table mt-3 table-responsive-sm">
+     <thead>
+       <tr class="text-center">
+         <th>
+           Id
+          
+         </th>
+         <th>Date</th>
+         <th>
+           Name     
+         </th>
+           <th>Email</th>
+        
+          </th>
+          <th>Company Name</th>
+          <th>
+            Designation     
+          </th>
+            <th>Phone Number</th>
+            <th>
+              Offering     
+            </th>
+            
+     
+        
+       </tr>
+     </thead>
+     <tbody>
+                       <tr
+         class="text-center align-middle"
+       >
+         <td class="align-middle">
+           <a href="/admin/brand/edit/1">  1</a>
+           </td>
+
+         <td class="align-middle">
+            2021-05-29 12:02:45
+         </td>
+
+         <td class="align-middle">
+            BOOKS
+         </td>
+         <td
+         class="align-middle"
+     
+       >
+       boks@bokk.com
+       </td>
+           <td
+           class="align-middle"
+       
+         >
+         UBER
+         </td>
+         <td
+         class="align-middle"
+     
+       >
+       Others
+       </td>
+       <td
+       class="align-middle"
+   
+     >
+     9009922299
+     </td>
+     <td
+     class="align-middle"
+ 
+   >
+   Product
+   </td>
+
+
+  </tr>
+         <tr
+         class="text-center align-middle"
+       >
+         <td class="align-middle">
+           <a href="/admin/brand/edit/2">  2</a>
+           </td>
+
+         <td class="align-middle">
+            2021-05-29 12:02:45
+         </td>
+
+         <td class="align-middle">
+            iioi
+         </td>
+         <td
+         class="align-middle"
+     
+       >
+       nij@nuni.com
+       </td>
+           <td
+           class="align-middle"
+       
+         >
+         HOTSTAR
+         </td>
+         <td
+         class="align-middle"
+     
+       >
+       Owner
+       </td>
+       <td
+       class="align-middle"
+   
+     >
+     7827227262
+     </td>
+     <td
+     class="align-middle"
+ 
+   >
+   Product
+   </td>
+
+
+  </tr>
+         </tbody>
+   </table>
+   
+
+
+<div
+class="modal fade"
+id="importdata"
+tabindex="-1"
+role="dialog"
+aria-labelledby="importdata"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="importdata">Import Files</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form
+        action="/admin/brand/brandimport"
+        method="post"
+        enctype="multipart/form-data"
+      >
+      <input type="hidden" name="_token" value="VT3wo06kOD4IQrm0FsZTwjMgjzDo9flyXf19x4qa">        <div class="form-group col-sm-12 col-md-12">
+         
+          <label for="file">Upload the file</label>
+          <input type="file" name="file" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-dark float-right">
+          Import
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+   
+
+ </div>
+        </main>
+    </div>
+    <script>
+
+    </script>
+
+
+</body>
+
+</html>

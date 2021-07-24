@@ -1,0 +1,147 @@
+:root {
+    --primary: #291968;
+    --border-bottom: #dddddd2f;
+    --accent: #D7251A;
+    --backgrnd: #F7F7F7;
+}
+
+.actives {
+    border-left: 10px solid #01AFBA;
+    color: #01AFBA;
+}
+
+a {
+    text-decoration: none;
+    border: 0px;
+    outline: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.ulres {
+    width: 20vw;
+}
+
+#items,
+.drpdwn {
+    color: var(--backgrnd);
+}
+
+#items {
+    font-size: 1.0rem;
+}
+
+.li-items {
+    border-bottom: 1px solid var(--border-bottom);
+    padding: 1.5rem;
+}
+
+.drpdwn {
+    border-bottom: 1px solid var(--border-bottom);
+    font-size: 1.0rem;
+    margin-top: 30px;
+}
+
+#items:hover,
+.drpdwn:hover {
+    color: var(--accent);
+}
+
+.navbar-custom {
+    position: fixed;
+    z-index: 5000;
+    background-color: var(--primary);
+    transition: width 200ms ease;
+}
+
+.navbar-nav-custom {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-item-custom {
+    width: 100%;
+}
+
+.nav-link-custom {
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    color: #000000;
+    text-decoration: none;
+    transition: 0.6s;
+}
+
+@media only screen and (max-width: 650px) {
+    .navbar-nav-custom {
+        width: 100vw;
+        height: 100vh;
+    }
+    #items,
+    .drpdwn {
+        font-size: 1rem;
+    }
+    .ulres {
+        width: 75vw;
+    }
+}
+
+.scroll {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--backgrnd) var(--accent);
+}
+
+.scroll::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: var(--backgrnd);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--backgrnd);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+body::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+@media only screen and (max-width:901px) and (min-width: 601px) {
+    .navbar-nav-custom {
+        top: 0;
+        width: 20vw;
+        height: 100vh;
+    }
+    body {
+        padding-bottom: 5rem;
+    }
+}
+
+@media only screen and (min-width: 902px) {
+    .navbar-nav-custom {
+        top: 0;
+        width: 15vw;
+        height: 100vh;
+    }
+    .main {
+        margin-left: 0vw;
+    }
+    body {
+        padding-bottom: 5rem;
+    }
+}
