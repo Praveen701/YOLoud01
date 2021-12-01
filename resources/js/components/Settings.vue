@@ -1,11 +1,15 @@
 <template>
-  <div class="card bg-white text-right p-2">
+<div >
+
+  <p class="mt-5 text-left" style="font-size:22px;"><b>My Profile</b> </p>
+
+
+  <div class="card bg-white p-1 mt-2 " style="border-radius: 20px;margin-bottom:5rem">
     <div class="card-body">
       <form action="/settings" method="post" id="myform">
         <input type="hidden" name="_token" :value="csrf" />
         <input type="hidden" name="intrest" v-model="userintrests" />
-        <input type="hidden" name="paytype" v-model="paytype" />
-        <input type="hidden" name="payval" id="payval" v-model="paymentform" />
+
 
         <input type="hidden" name="occtype" v-model="occtype" />
          <input type="hidden" name="occval" id="occval" v-model="occupationform" />
@@ -27,346 +31,317 @@
         <input type="hidden" name="categorystatus" v-model="categorystatus"/>
         
 
-        <input
-          type="hidden"
-          name="iusername"
-          v-model="instagram.iusername"
-          id=""
-        />
-        <input
-          type="hidden"
-          name="ifollowers"
-          v-model="instagram.ifollowers"
-          id=""
-        />
-        <input type="hidden" name="iposts" v-model="instagram.iposts" id="" />
-    <input type="hidden" name="iposts" v-model="instagram.iposts" id="" />
-         <input type="hidden" name="istatus" v-model="instagram.istatus" id="" />
-
-          <input type="hidden" name="iavglike" v-model="instagram.iavglike" id="" />
-           <input type="hidden" name="iavgcmt" v-model="instagram.iavgcmt" id="" />
-      
-      
-              <input type="hidden" name="iusernamesstatus" v-model="instagram.iusernamesstatus" id="" />
-         <input type="hidden" name="ifollowersstatus" v-model="instagram.ifollowersstatus" id="" />
-          <input type="hidden" name="ipostsstatus" v-model="instagram.ipostsstatus" id="" />
-           <input type="hidden" name="iavglikestatus" v-model="instagram.iavglikestatus" id="" />
-                   <input type="hidden" name="iaudagestatus" v-model="instagram.iaudagestatus" id="" />
-         <input type="hidden" name="iaudlocstatus" v-model="instagram.iaudlocstatus" id="" />
-          <input type="hidden" name="iaudgenestatus" v-model="instagram.iaudgenestatus" id="" />
-        <input type="hidden" name="iavgcmtstatus" v-model="instagram.iavgcmtstatus" id="" />
-          <input type="hidden" name="ipfrstatus" v-model="instagram.ipfrstatus" id="" />     
-       <input type="hidden" name="ipfr" v-model="instagram.ipfr" id="" />
-      
-      
-
-
-
-     <input
-          type="hidden"
-          name="iaudienceloc"
-          v-model="audcity"
-          
-        />
-
-        <input
-          type="hidden"
-          name="iaudienceage"
-          v-model="audage"
-          id=""
-        />
-        <input
-          type="hidden"
-          name="iaudiencegen"
-          v-model="instagram.iaudiencegen"
-          id=""
-        />
-         <input type="hidden" name="yurl" v-model="yftsocial.yurl" id="" />
-         <input type="hidden" name="furl" v-model="yftsocial.furl" id="" />
-          <input type="hidden" name="tusername" v-model="yftsocial.tusername" id="" />
-        <input type="hidden" name="yurlstatus" v-model="yftsocial.yurlstatus" id="" />
-          <input type="hidden" name="furlstatus" v-model="yftsocial.furlstatus" id="" />     
-       <input type="hidden" name="tusernamestatus" v-model="yftsocial.tusernamestatus" id="" />
-
-
- <button
-            type="button"
-            class="btn btn-primary p-2 float-right "
-            v-on:click="savebutton"
-          >
-             Save Changes
-          </button>
-        <h3 class="mt-2 mb-3 text-left">Settings</h3>
  
-        <div class="text-right">
-          <ul class="nav text-left">
-            <li class="nav-item">
-              <a
-                class="nav-link btn"
-                v-on:click="changePage(0)"
-                v-bind:style="page == 0 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
-              >
-                <h4>General Profile</h4></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn"
-                v-on:click="changePage(1)"
-                v-bind:style="page == 1 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
-              >
-                <h4>Social Profile</h4></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn"
-                v-on:click="changePage(2)"
-                v-bind:style="page == 2 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
-              >
-                <h4>Interest</h4></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn"
-                v-on:click="changePage(3)"
-                v-bind:style="page == 3 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
-              >
-                <h4>Payments</h4></a
-              >
-            </li>
-         
-          </ul>
-          <div class="container-fluid text-left">
-            <span v-if="page == 0" >
-              <div class="row">
+        <div class="container">
 
-             
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input
-                    required
-                    v-model="name"
-                    type="text"
-                    class="form-control"
-                    id="name"
-                    placeholder="Enter Name"
-                  />
-              
-                </div>
-              </div>
+        <div class="container-fluid text-left ">
+           
 
-                 <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="email" class="form-label">Email</label><br />
-                   <input
-                    type="email"
-                    class="form-control"
-                    v-model="email"
-                    id="email"
-                    placeholder="Enter Email"
-                  />
-                 
-              
-              
-                  
-                      </div>
-                    
-              </div>
-                   
+               <h5 class="mt-2" style="color:#7e7979"><b>Let us know a little about yourself</b></h5>
 
-              
-  
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="phone" class="form-label">Phone Number</label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    value=""
-                    v-model="phone"
-                    id="phone"
-                    placeholder="Enter Phone Number"
-                  />
-                      
-                </div>
-              </div>
+                               <div class="row mt-4">
 
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="gender" class="form-label">Gender</label>
-                  <select id="gender" v-model="gender" class="form-control">
-                    <option value="Male" selected>Male</option>
-                    <option value="Female">Female</option>
-                    
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="dob" class="form-label">Date of Birth <span style="color:red">*</span></label>
+                                   <div class="col-sm-12 mt-2 col-md-6">
+                                        <div class="form-group" >
+                                    
+
+                                            <div class="form-floating" >
+                                              <input type="text" class="form-control" placeholder="  "  style="border-radius:10px;" 
+                                            :style=" profile.name != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " v-model="profile.name" id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Name</b></label>
+                                            </div>
+                                     
+                                            
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-2 col-md-6">
+                                        <div class="form-group" >
+                                    
+
+                                            <div class="form-floating" >
+                                              <input type="email" class="form-control" placeholder="  "  style="border-radius:10px;" 
+                                            :style=" email != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " v-model="email" id="floatingInput" >
+                                              
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Email</b></label>
+                                          
+
+                                            </div>
+                                      
+                                            
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-2 col-md-6">
+                                        <div class="form-group" >
+                                    
+
+                                            <div class="form-floating" >
+                                              <input type="text" class="form-control" placeholder="  "  style="border-radius:10px;" name="phone"
+                                            :style=" influencers.phone != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " v-model="phone" id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Mobile</b></label>
+                                            </div>
+                                      
+                                            
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-2 col-md-6">
+                                        <div class="form-group" >
+                                    
+
+                                            <!-- <div class="form-floating" >
+                                              <input type="date" class="form-control"   placeholder="  "   style="border-radius:10px;" 
+                                            :style=" influencers.dob != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;'"  @input="calcage" v-model="dob" id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Date of Birth</b></label>
+                                            </div> -->
+                     <p style="font-size: 0.87rem;color:#6aa3d8"> <b> Date of Birth</b>
+                      </p> 
+                      <!-- <label for="dob" style="color:#6aa3d8" class="form-label">Date of Birth</label> -->
                   <input
                     type="date"
-                    class="form-control"
+                    style="margin: -16px 0 0 0;"
+                    class="form-control "
                     id="dob"
                     @input="calcage"
                     v-model="dob"
+              
                     placeholder="Enter Date of Birth"
                   />
-                </div>
-              </div>
-                  <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="pincode" class="form-label">Pincode</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="pincode"
-                    v-model="pincode"
-                    placeholder="Enter Pincode"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="city" class="form-label">City</label>
-                      <multiselect  v-model="dcity"  :options="ccoptions"  :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select City" :preselect-first="false">
+
+
+                                      
+                                            
+                                        </div>
+
+                                    </div>
+
+                  
+
+
+                               </div>
+
+             
+             
+             <h5 class="mt-4" style="color:#7e7979"><b>Where do Stay ?</b></h5>
+
+
+
+           <div class="row mt-4">
+
+                        <div class="col-sm-12 mt-2 col-md-4">
+                            <div class="form-group" >
+                        
+
+                                <div class="form-floating" >
+                                  <input type="text" class="form-control" placeholder="  "  name="pincode" style="border-radius:10px;" 
+                                :style=" pincode != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " v-model="pincode" id="floatingInput" >
+                                    <label for="floatingInput" style="color:#6aa3d8"> <b>Pincode</b></label>
+                                </div>
+                          
+                                
+                            </div>
+
+                        </div>
+                         <div class="col-sm-12 mt-2 col-md-2">
+                            <div class="form-group" >
+                        
+
+                           <button type="button" class="btn btn-sm btn-outline-primary mt-3 ml-1" v-on:click="getdetails()">Get Details</button>
+                          
+                                
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-sm-12 mb-2 col-md-6" >
+                            <div class="form-group"  >
+                        
+
+                          
+                           <label for="" style="color:#6aa3d8"> <b>City</b></label>
+                                        <multiselect  v-model="dcity"  :options="ccoptions"  :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select City" :preselect-first="false">
                           
                        </multiselect>
-                </div>
-              </div>
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="state" class="form-label">State</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="state"
-                    v-model="state"
-                    placeholder="Enter State"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  <label for="country" class="form-label">Country</label>
-                  <select v-model="country" id="country" class="form-control">
-                    <option value="Afganistan">Afghanistan</option>
-                    <option selected>India</option>
-                    <option value="Myanmar">Myanmar</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="Qatar">Qatar</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="Sri Lanka">Sri Lanka</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="United Arab Erimates">
-                      United Arab Emirates
-                    </option>
-                    <option value="United States of America">
-                      United States of America
-                    </option>
-                  </select>
-                </div>
-              </div>
-          
+                                  
+                                   
+                                
+                           
+                          
+                                
+                            </div>
 
+                        </div>
 
-      <div>
-        
-      </div>
-      
-  
+                        
+                        <div class="col-sm-12 mt-2 col-md-6">
+                            <div class="form-group" >
+                        
 
-      
-              <div class="col-sm-12 mt-2 col-md-6">
-                <div class="form-group">
-                  
-                  <label for="occoption" class="form-label">Occupation</label>
-                <select
-                        @change="changeoccopt($event)"
-                        v-model="occoption"
-                        class="form-control"
-                      >
-                        <option v-for="occupation in occupations">
-                          {{ occupation }}
-                        </option>
-                      </select>
-                </div>
-              </div>
+                                <div class="form-floating" >
+                                  <input type="text" class="form-control" placeholder="  "  name="state" style="border-radius:10px;" 
+                                :style=" influencers.state != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' 
+                                " v-model="state" id="floatingInput" disabled>
+                                    <label for="floatingInput" style="color:#6aa3d8"> <b>State</b></label>
+                                </div>
+                          
+                                
+                            </div>
 
+                        </div>
+
+                        
+                        <div class="col-sm-12 mt-2 col-md-6">
+                            <div class="form-group" >
+                        
+
+                                <div class="form-floating" >
+                                  <input type="text" class="form-control" placeholder="  "  name="country" style="border-radius:10px;" 
+                                :style=" influencers.country != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;'
+                                 " v-model="country" id="floatingInput" disabled>
+                                    <label for="floatingInput" style="color:#6aa3d8"> <b>Country</b></label>
+                                </div>
+                          
+                                
+                            </div>
+
+                        </div>
+
+                        
+           </div>
+
+            <h5 class="mt-4" style="color:#7e7979"><b>Help us know you better</b></h5>
+
+            <div class="mt-4 rinline" >
+         
+         
               
-              <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Working Professional'">
-                <div class="form-group">
-                  <label for="compname" class="form-label">Company Name</label>
-                  <input
-                    type="text"
-                    class="form-control"                 
-                    v-model="occval.compname"
-                     :disabled="occval.status == 1"
-                    id="compname"
-                    placeholder="Enter Company Name"
-                  />
-                      
-                </div>
-              </div>
+
+             
+        
+                   <div class="form-check form-check-inline ">
+              <input class="form-check-input mt-1" type="radio" name="gender" v-model="gender" id="inlineRadio1" value="Male">
+              <label class="form-check-label" for="inlineRadio1" style="color:#7e7979;font-size: 0.86rem;"><b>Male</b></label>
+            </div>
+              
+                
+                      <div class="form-check form-check-inline ">
+              <input class="form-check-input mt-1" type="radio" name="gender" v-model="gender" id="inlineRadio2" value="Female">
+              <label class="form-check-label" for="inlineRadio2" style="color:#7e7979;font-size: 0.86rem;"><b>Female</b></label>
+            </div>
+               
+                   
+                       <div class="form-check form-check-inline ">
+              <input class="form-check-input mt-1" type="radio" name="gender" v-model="gender" id="inlineRadio3" value="Other">
+              <label class="form-check-label" for="inlineRadio3" style="color:#7e7979;font-size: 0.86rem;"><b>Other</b></label>
+            </div>
+  
+             
+
+
+           
+                
+          
+             
+
+            </div>
+
+            
+
+             <div class="container mt-5 rinline">
+
+               <div class="row ">
+                
+                     <div class="form-check  col-md-2 col-12" v-for="occupation in occupations">
+                 
+              <input class="form-check-input mt-1" type="radio" name="occoption"   @change="changeoccopt($event)" id="inlineRadio4" v-model="occoption" :value="occupation">
+              <label class="form-check-label" for="inlineRadio4" style="color:#7e7979;font-size: 0.86rem;"><b>  {{ occupation }}</b></label>
+        
+
+                 </div>
+
+               </div>
+          
+               
+               </div>
+
+               
+
+             <div class="row mt-4"> 
 
                 <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Working Professional'">
-                <div class="form-group">
-                  <label for="designation" class="form-label">Designation</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="occval.designation"
-                      :disabled="occval.status == 1"
-                    id="designation"
-                    placeholder="Enter Designation"
-                  />
-                      
-                </div>
-              </div>
+                          <div class="form-group" >
+                                    
 
-              
-               <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Student'">
+                              <div class="form-floating" >
+                                         <input type="email" class="form-control" placeholder="  " name="compname"   style="border-radius:10px;" 
+                                            :style=" occval.compname != '' ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " 
+                                               v-model="occval.compname"
+                                    :disabled="occval.status == 1"   id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Company Name</b></label>
+                           </div>
+                                      
+                                            
+                         </div>
+                   </div>
+
+                      <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Working Professional'">
+                          <div class="form-group" >
+                                    
+
+                              <div class="form-floating" >
+                                         <input type="email" class="form-control" placeholder="  " name="designation"  style="border-radius:10px;" 
+                                            :style=" occval.designation != '' ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " 
+                                               v-model="occval.designation"
+                                    :disabled="occval.status == 1"   id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Designation</b></label>
+                           </div>
+                                      
+                                            
+                         </div>
+                   </div>
+
+                      <div class="col-sm-12 col-12 mt-1 col-md-5" v-if="occoption == 'Student'">
                
-                <div class="form-group row mt-3">
-                  <label for="agender" class="form-label mt-2 col-6">
+                <div class="form-group row ">
+               
+                       <label for="agender" class="form-label mt-3 col-12 col-md-12 instaf cdesmd" style="color:#7e7979">
                     Do you want to be a part of our campus ambassador program ?
-                    <a  data-toggle="tooltip" data-placement="bottom" title="Creators studying in college can represent their college by become a campus ambassador of their college">
+                    <a  data-toggle="tooltip" data-placement="right" title="Creators studying in college can represent their college by become a campus ambassador of their college">
                       <i class="fa fa-info-circle"></i>
                     </a>
            
                     </label>
 
-                 
-                  <div class="mt-2 col-6">
-                   <div class="form-check form-check-inline mt-2">
-                          <input class="form-check-input" type="radio" name="campuspro"  v-model="occval.campuspro" value="1">
-                          <label class="form-check-label" for="alocation">Yes</label>
-                        </div>
-                     <div class="form-check form-check-inline mt-2">
-                          <input class="form-check-input" type="radio" name="campuspro" v-model="occval.campuspro" value="0">
-                          <label class="form-check-label" for="agender">No</label>
-                     </div>
-                  </div>  
-                </div>
+                 </div>
               </div>
+               
 
+                 
+                  <div class="mt-2 col-12 col-md-7 mt-3" v-if="occoption == 'Student'">
+                    <div class="form-check form-check-inline">
+              <input class="form-check-input mt-1" type="radio"  id="inlineRadio8" name="campuspro"  v-model="occval.campuspro" value="1">
+              <label class="form-check-label" for="inlineRadio8" style="color:#7e7979;font-size: 0.86rem;"><b>Yes</b></label>
+            </div>
+               <div class="form-check form-check-inline">
+              <input class="form-check-input mt-1" type="radio"  id="inlineRadio9" name="campuspro"  v-model="occval.campuspro" value="0">
+              <label class="form-check-label" for="inlineRadio9" style="color:#7e7979;font-size: 0.86rem;"><b>No</b></label>
+            </div>
+                  </div>  
+             
 
-              <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Student' && occval.campuspro == 1">
+               <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Student' && occval.campuspro == 1">
                 <div class="form-group">
-                  <label for="colgname" class="form-label">College Name</label>
-                  <input
-                  required
-                    type="text"
-                    class="form-control"
-                    v-model="occval.colgname"
-                        :disabled="occval.status == 1"
-                    id="colgname"
-                    placeholder="Enter Designation"
-                  />
+                    <div class="form-floating" >
+                    <input type="email" class="form-control" placeholder="  " name="colgname"  style="border-radius:10px;" 
+                        :style=" occval.colgname != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " 
+                            v-model="occval.colgname"
+                        :disabled="occval.status == 1"  id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>College Name</b></label>
+                           </div>
                       
                 </div>
               </div>
@@ -374,345 +349,92 @@
               
                <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Student' && occval.campuspro == 1">
                 <div class="form-group">
-                  <label for="coursename" class="form-label">Course Name</label>
-                  <input
-                  required
-                    type="text"
-                    class="form-control"
-                    v-model="occval.coursename"
-                        :disabled="occval.status == 1"
-                    id="coursename"
-                    placeholder="Enter Course Name"
-                  />
+                  <div class="form-floating" >
+                    <input type="email" class="form-control" placeholder="  "  name="coursename" style="border-radius:10px;" 
+                        :style=" occval.colgname != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " 
+                             v-model="occval.coursename"
+                        :disabled="occval.status == 1" id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Course Name</b></label>
+                           </div>
                       
                 </div>
               </div>
                <div class="col-sm-12 mt-2 col-md-6" v-if="occoption == 'Student' && occval.campuspro == 1">
                 <div class="form-group">
-                  <label for="yrofjoin" class="form-label">Year of Joining</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="occval.yrofjoin"
-                        :disabled="occval.status == 1"
-                    id="yrofjoin"
-                    placeholder="Enter Year of Joining"
-                  />
+                 <div class="form-floating" >
+                    <input type="email" class="form-control" placeholder="  "  name="yrofjoin" style="border-radius:10px;" 
+                        :style=" occval.yrofjoin != null ? 'border: solid 3px #6aa3d8;' : 'border: solid 3px #c4c4c4;' " 
+                           v-model="occval.yrofjoin"
+                        :disabled="occval.status == 1" id="floatingInput" >
+                                                <label for="floatingInput" style="color:#6aa3d8"> <b>Year of Joining</b></label>
+                           </div>
                       
                 </div>
               </div>
       
-                    
 
-            </div>
-            
-               <button
-            type="button"
-            class="btn btn-secondary p-2 float-right mt-3 "
-            v-on:click="changePage(1)"
-          >
-             Next
-          </button>
-           
-            
-           
-            </span>
-            <span v-else-if="page == 1" class="row">
 
-              <div class="col-sm-12 col-md-12 mt-2">                 
-                      <h2 class="mt-2">
-                      
-                          Instagram
-                   
-                      </h2>
-                        <div class="row">
-                          <div class="form-group col-sm-12 col-md-6">
-                            <label for="">Instagram Username</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              v-model="instagram.iusername"
-                              placeholder="Enter Instagram Id"
-                            />
-                             <small  v-if="instagram.iusernamesstatus == 0">
-                                   Not Verified
-                                </small>
-                                <small style="color:red" v-if="instagram.iusernamesstatus == 1">
-                                  Rejected
-                                </small>
-                                <small style="color:green" v-if="instagram.iusernamesstatus == 2">
-                              Verified
-                                </small>
-                          </div>
-                    
-                      
-                            
-                              
-                          <div class="form-group col-sm-12 col-md-6">
-                            <label for="">Top 3 Audience Location</label>
-                         
-                                    <multiselect  v-model="audcity" v-on:input="limiter" :options="ccoptions"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location" :preselect-first="false">
-                          
-                                  </multiselect>
 
-                                  
-                               <small  v-if="instagram.iaudlocstatus == 0">
-                                 Not Verified
-                                </small>
-                                <small style="color:red" v-if="instagram.iaudlocstatus == 1">
-                                Rejected
-                                </small>
-                                <small style="color:green" v-if="instagram.iaudlocstatus == 2">
-                                Verified
-                                </small>
-                          </div>
-                          <div class="form-group col-sm-12 col-md-6">
-                            <label for="audienceage">Top 3 Audience Age Group</label>
-                          
-                               <multiselect  v-model="audage" v-on:input="limiter" :options="aaoptions"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location" :preselect-first="false">
-                          
-                                  </multiselect>
-                            
-                               <small  v-if="instagram.iaudagestatus == 0">
-                                 Not Verified
-                                </small>
-                                <small style="color:red" v-if="instagram.iaudagestatus == 1">
-                                    Rejected
-                                </small>
-                                <small style="color:green" v-if="instagram.iaudagestatus == 2">
-                            Verified
-                                </small>
-                          </div>
-                          <div class="form-group col-sm-12 col-md-6">
-                            <label for="audiencegen">Target Gender</label>
+            </div> 
 
-                            <select
-                              value=""
-                              id="audiencegen"
-                              v-model="instagram.iaudiencegen"
-                              class="form-control"
-                            >
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                             
-                            </select>
+
+
+
           
 
-                              <small  v-if="instagram.iaudgenestatus == 0">
-                                Not Verified
-                                </small>
-                                <small style="color:green" v-if="instagram.iaudgenestatus == 1">
-                                Rejected
-                                </small>
-                                <small style="color:green" v-if="instagram.iaudgenestatus == 2">
-                                Verified
-                                </small>
-                          </div>
-
-                   <div class="form-group col-sm-12 col-md-6">
-                        
-                         <form action="/settings/uploadins" method="post" enctype="multipart/form-data" id="myInputFileID">
-                       
-                                <div class="row justify-content-start">
-                                    <div class="col-8">
-                                  <input type="hidden" name="_token" :value="csrf" />
-                                      <div class="form-group">
-                                        <label for="">Update Audience Insights</label>  
-                                        <input required type="file" class="form-control-file" name="contentphoto" id="myInputFileID"  aria-describedby="fileHelpId">
-                                        <small id="myInputFileID" class="form-text text-muted">Select a File of Png,Svg,Jpg with a size limit  of 7mb</small>
-                                      </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                      <div class="container">
-                                           <button class="btn btn-dark btn-sm" type="sumbit">Upload</button>
-                                      </div>
-                                        <div class="container" v-if="influencers.contentphoto != null">
-                                          <button type="button" class="btn btn-primary btn-sm mt-2" data-toggle="modal" data-target="#exampleModalCenter">
-                                            View
-                                          </button>
-                                      </div>
-                                    </div>
-                                    
-                              </div>
-                        </form>
-
-
-
-
-
-                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLongTitle">Content Photo</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="col-6">
-                                    <img :src="'/storage/content/' + influencers.contentphoto" width="230" height="230" alt="">
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  
-                                </div>
-                              </div>
-                            </div>
-                          </div>     
-
-
-                </div> 
-
-                      
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6">
-                             <h2 class="mt-2">Youtube</h2>    
-                      
-                                <div class="form-group">
-                                      <label for="">Channel URL</label>
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="yftsocial.yurl"
-                                        name="yurl"
-                                        placeholder="Enter Channel URL"
-                                      />
-                                       <small  v-if="yftsocial.yurlstatus == 0">
-                                        Not Verified
-                                        </small>
-                                        <small style="color:red" v-if="yftsocial.yurlstatus == 1">
-                                      Rejected
-                                        </small>
-                                        <small style="color:green" v-if="yftsocial.yurlstatus == 2">
-                                          Verified
-                                        </small>
-                                      
-                                </div>
-                   
-                          </div>
-                           <div class="col-6">
-                               <h2 class="mt-2">Facebook</h2>    
-                        
-                                  <div class="form-group">
-                                        <label for="">Profile URL</label>
-                                        <input
-                                          type="text"
-                                          name="furl"
-                                          class="form-control"
-                                          v-model="yftsocial.furl"
-                                          placeholder="Enter Profile URL"
-                                        />
-                                          <small  v-if="yftsocial.furlstatus == 0">
-                                        Not Verified
-                                        </small>
-                                        <small style="color:red" v-if="yftsocial.furlstatus == 1">
-                                        Rejected
-                                        </small>
-                                        <small style="color:green" v-if="yftsocial.furlstatus == 2">
-                                         Verified
-                                        </small>
-                                        
-                                  </div>
-                          </div>
-
-
-
-
-
-                        </div>
-
-
-                      
-                        <h2 class="mt-3">Twitter</h2>      
-                   <div class="row mt-2">  
-                      <div class="form-group col-sm-12 col-md-6">
-                            <label for="">Username</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="tusername"
-                              v-model="yftsocial.tusername"
-                              placeholder="Enter Username"
-                            />
-                             <small  v-if="yftsocial.tusernamestatus == 0">
-                              Not Verified
-                              </small>
-                              <small style="color:green" v-if="yftsocial.tusernamestatus == 2">
-                              Verified
-                              </small>
-                              <small style="color:red" v-if="yftsocial.tusernamestatus == 1">
-                              Rejected
-                              </small>
-                            
-                      </div>
-                    </div>
-
-                    <button
-            type="button"
-            class="btn btn-secondary p-2 float-right mt-3"
-            v-on:click="changePage(2)"
-          >
-             Next
-          </button>
-              
-           
-            <button
-            type="button"
-            class="btn btn-secondary p-2 float-right mt-3 mr-3"
-            v-on:click="changePage(0)"
-          >
-             Previous
-          </button>
-
-               
-                
-              
-              </div>
-
-               
+          
 
            
+              
+  
 
-            </span>
-            <span v-else-if="page == 2" class="containerr-fluid">
-              <h5 class="mb-3 mt-2"> 
-                Choose Your Intrested Areas ( Select max.3 )
-              </h5>
-              <div class="row mt-2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <h5 class="mt-4" style="color:#7e7979"><b>Which category are you into?</b></h5>
+
+
+                <div class="row mt-4">
                 <button
+                style="border-radius:14px;"
                   type="button"
                   v-on:click="intrestcheck(item.name)"
                   :class="[
                     userintrests.includes(item.name)
-                      ? 'col-sm-12 p-2 m-1 mt-2 col-md-2 btn btn-primary'
-                      : 'col-sm-12 mt-2 m-1 p-2 col-md-2 btn btn-outline-primary',
+                      ? 'col-sm-3 col-3  m-1 mt-2 col-md-2 btn btn-primary btn-sm '
+                      : 'col-sm-3 col-3 mt-2 m-1  col-md-2 btn btn-outline-secondary btn-sm',
                   ]"
                   v-for="(item, index) in intrest"
                 >
                   {{ item.name }}
                 </button>
               </div>
-                 <div class="form-group col-sm-12 col-md-6 mt-5">
-                            <label for="">Category Status :</label>
-                            <b v-if="categorystatus == 0">Not Verified</b>
-                            <b v-if="categorystatus == 2" style="color:green">Rejected</b>
-                            <b v-if="categorystatus == 1" style="color:green">Verified</b>
-                </div>
 
-                   <h5 class="mb-3 mt-4">Choose Languages You Know</h5>
-              <div class="row mt-2">
+
+
+               <h5 class="mt-4" style="color:#7e7979"><b>What are the languages that you know?</b></h5>
+
+                <div class="row mt-4">
               
                 <button
                   type="button"
+                    style="border-radius:14px;"
                   v-on:click="languagecheck(item.name)"
                   :class="[
                     userlanguages.includes(item.name)
-                      ? 'col-sm-12 p-2 m-1 mt-2 col-md-2 btn btn-primary'
-                      : 'col-sm-12 mt-2 m-1 p-2 col-md-2 btn btn-outline-primary',
+                      ?   'col-sm-3 col-3  m-1 mt-2 col-md-2 btn btn-primary btn-sm'
+                      : 'col-sm-3 col-3 mt-2 m-1  col-md-2 btn btn-outline-secondary btn-sm',
                   ]"
                   v-for="(item, index) in languages"
                 >
@@ -720,207 +442,76 @@
                 </button>
               </div>
 
-                       <button
+               <button
             type="button"
-            class="btn btn-secondary p-2 float-right mt-3"
-            v-on:click="changePage(3)"
+            class="btn  mt-5  float-left "
+            v-on:click="savebutton"
+            style="width:9rem;border-radius:20px;background-color:#6aa3d8;color:White"
           >
-             Next
+             <b>Save Changes</b>
           </button>
-              
+
+
+      
+          </div> 
+        
+
            
-            <button
-            type="button"
-            class="btn btn-secondary p-2 float-right mt-3 mr-3"
-            v-on:click="changePage(1)"
-          >
-             Previous
-          </button>
 
 
-            </span>
-            <span v-else-if="page == 3">
-              <h2 class="col-12">How you want your Payment to be done ?</h2>
 
-              <div class="row mt-2">
-                <div class="col-12 mt-2">
-                  <div class="col-12">
-                    <div class="form-group w-50">
-                      <select
-                        @change="changepayopt($event)"
-                        v-model="payoption"
-                        class="form-control"
-                      >
-                        <option v-for="payment in payments">
-                          {{ payment }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                
-                  <div class="row" v-if="payoption == 'UPI'">
-                    <h4 class="col-12 mt-4">UPI Details</h4>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="fullname" class="form-label"
-                          >Full name</label
-                        >
-                        <input
-                          type="text"
-                          v-model="payval.fullname"
-                          class="form-control"
-                          id="fullname"
-                          :disabled="payval.status == 1"
-                          placeholder="Enter Full name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="upiid" class="form-label">UPI Id</label>
-                        <input
-                          type="text"
-                          v-model="payval.upiid"
-                          class="form-control"
-                          :disabled="payval.status == 1"
-                          id="upiid"
-                          placeholder="Enter UPI Id"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row" v-else-if="payoption == 'Bank Account Transfer'">
-                    <h4 class="col-12 mt-4">Enter Bank Details</h4>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="accname" class="form-label"
-                          >Account Holder name</label
-                        >
-                        <input
-                          type="text"
-                          v-model="payval.accname"
-                          class="form-control"
-                          id="accname"
-                          :disabled="payval.status == 1"
-                          placeholder="Enter Account holder Name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="accnumber" class="form-label"
-                          >Account Number</label
-                        >
-                        <input
-                          type="text"
-                          v-model="payval.accno"
-                          class="form-control"
-                          :disabled="payval.status == 1"
-                          id="accnumber"
-                          placeholder="Enter Account Number"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="ifsc" class="form-label">IFSC Code</label>
-                        <input
-                          v-model="payval.ifsc"
-                          type="text"
-                          :disabled="payval.status == 1"
-                          class="form-control"
-                          id="ifsc"
-                          placeholder="Enter IFSC Code"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row" v-else>
-                    <h4 class="col-12 mt-4">Paytm Details</h4>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label
-                          for="fullname"
-                         
-                          class="form-label"
-                          >Full name</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="fullname"
-                          v-model="payval.fullname"
-                          :disabled="payval.status == 1"
-                          placeholder="Enter Full name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-12 mt-2 col-md-6">
-                      <div class="form-group">
-                        <label for="paytmnumber" class="form-label"
-                          >Paytm Number</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="paytmnumber"
-                          v-model="payval.paytmnumber"
-                          :disabled="payval.status == 1"
-                          placeholder="Enter Paytm Number"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-12 mt-2 col-md-8">
-                      <div class="form-group">
-                        <b>*KYC-verified Paytm accounts only</b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button
-            type="button"
-            class="btn btn-secondary p-2 float-right mt-3 mr-3"
-            v-on:click="changePage(2)"
-          >
-             Previous
-          </button>
-            </span>
-        
-          </div>
-        
-          <!-- <div class="tab-content text-left">
-            <div role="tabpanel" class="tab-pane fade" id="aofi">
-              <div class="mt-2 card">
-                <div class="card-body text-dark"></div>
-                <div class="card-footer">
-                  <input
-                    type="submit"
-                    class="float-right btn btn-primary"
-                    value="Save Changes"
-                  />
-                </div>
-              </div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="Payment">
-              <div class="mt-2 card">
-                <div class="card-body text-dark"></div>
-                <div class="card-footer">
-                  <input
-                    type="submit"
-                    class="float-right btn btn-primary"
-                    value="Save Changes"
-                  />
-                </div>
-              </div>
-            </div>
-          </div> -->
+
+
+
+
+         
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
         </div>
       </form>
     </div>
+
+
+
   </div>
+
+</div>
+
 </template>
+
+<style scoped>
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+     background-color:#6aa3d8;
+      border-color: #6aa3d8;
+}
+</style>
 
 <script>
 $(function () {
@@ -941,9 +532,9 @@ export default {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content"),
       page: 0,
-      payments: ["Bank Account Transfer", "Paytm", "UPI"],
-      payoption: "Bank Account Transfer",
-       occupations: ["Working Professional", "Student", "Full Time Social Media Influencer"],
+      // payments: ["Bank Account Transfer", "Paytm", "UPI"],
+      // payoption: "Bank Account Transfer",
+     occupations: ["Working Professional", "Student", "Full Time Social Media Influencer", "Any Other"],
       occoption: "Working Professional",
       name: this.profile.name,
        email: this.profile.email,
@@ -952,13 +543,16 @@ export default {
       age: this.influencers.age,
       gender: this.influencers.gender,
       dob: this.influencers.dob,
-
+      inftype:this.influencers.inftype,
+      getd:'',
        occtx: JSON.parse(this.influencers.occupation),
       occtype: "",
       occupationform: "",
       occval: "",
+       
+      pat1:'',
 
-      paytx: JSON.parse(this.influencers.payment),
+      // paytx: JSON.parse(this.influencers.payment),
       paytype: "",
       paymentform: "",
       payval: "",
@@ -977,7 +571,7 @@ export default {
      
         editcity:'',
 
-      insta: this.instagram,
+      // insta: this.instagram,
          aaoptions: [
          '0 - 18'  ,
         '19 - 24' ,
@@ -2213,14 +1807,14 @@ export default {
  
       payopt: {},
       occopt: {},
-      audage:this.instagram.iaudienceage
-       ? this.instagram.iaudienceage.split(",")
-        : []
-       ,
-       audcity:this.instagram.iaudienceloc
-       ? this.instagram.iaudienceloc.split(",")
-        : []
-       ,
+      // audage:this.instagram.iaudienceage
+      //  ? this.instagram.iaudienceage.split(",")
+      //   : []
+      //  ,
+      //  audcity:this.instagram.iaudienceloc
+      //  ? this.instagram.iaudienceloc.split(",")
+      //   : []
+      //  ,
       userintrests: this.influencers.intrest
         ? JSON.parse(this.influencers.intrest)
         : [],
@@ -2275,10 +1869,10 @@ export default {
       this.userintrests = [];
     }
     document.getElementById("dob").setAttribute("max", this.today);
-    this.payoption = this.paytx.type;
-    this.paytype = this.paytx.type;
-    this.payval = JSON.parse(this.paytx.value);
-    this.paymentform = this.paytx.value;
+    // this.payoption = this.paytx.type;
+    // this.paytype = this.paytx.type;
+    // this.payval = JSON.parse(this.paytx.value);
+    // this.paymentform = this.paytx.value;
 
     this.occoption = this.occtx.type;
     this.occtype = this.occtx.type;
@@ -2341,8 +1935,40 @@ export default {
                    
      this.page = val;      
     },
-
     
+
+         async getdetails(){   
+                       
+               if(this.pincode != '')
+               {
+           
+            const pin = this.pincode;
+           const string = `https://api.postalpincode.in/pincode/${pin}/`
+            const response = await axios.get(string); 
+              if(response.data[0].PostOffice == null){
+                    this.$swal({
+                title: "Error!",
+                text: "Invaild Pincode!",
+                icon: "error",
+              });
+              }
+              else{   
+              this.city = response.data[0].PostOffice[0].Division;
+              this.country = response.data[0].PostOffice[0].Country;
+              this.state = response.data[0].PostOffice[0].State;
+                  
+              }                
+              }
+              else{
+                      this.$swal({
+                title: "Error!",
+                text: "Invaild Pincode!",
+                icon: "error",
+              });
+              }
+        },
+    
+
    languagecheck(val){
             if(this.userlanguages.includes(val)){
                 this.userlanguages.splice(this.userlanguages.indexOf(val),1)
@@ -2363,6 +1989,9 @@ export default {
         e.pop()
       }
     },
+
+   
+
         
            
        
@@ -2461,14 +2090,12 @@ export default {
       }
     },
 
+   
     savebutton(event) {
    
       event.preventDefault();
         
-      if (this.today >= this.dob) {
-      
-       
-        this.paymentform = JSON.stringify(this.payval);
+  
   
          this.occupationform = JSON.stringify(this.occval);
           this.$swal({
@@ -2477,22 +2104,15 @@ export default {
               text: "",
               icon: "success",
           });  
-         document.getElementById("payval").value = this.paymentform;
+      
         document.getElementById("occval").value = this.occupationform;
         document.getElementById("myform").submit();
           
-         document.getElementById("myInputFileID").submit();
+        
 
      
         return true;      
-      } else {
-        this.$swal({
-          title: "Error!",
-          text: "Please Check the DOB!",
-          icon: "error",
-        });
-        return false;
-      }
+ 
         
     },
   },

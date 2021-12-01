@@ -1,6 +1,6 @@
 <template>
 <div>
-   <form action="/admin/campaign/create" method="post" id="campaignform">
+   <!-- <form action="/admin/campaign/create" method="post" id="campaignform">
        <input type="hidden" name="_token" :value="csrf" />
         <input type="hidden" name="id" v-model="id" />
         <input type="hidden" name="campaigntitle" v-model="campaigntitle" />
@@ -38,16 +38,24 @@
         <input type="hidden" name="orderedby" v-model="orderedby" />
            
         <input type="hidden" name="pprice" v-model="pprice" />
+
          <input type="hidden" name="crange" v-model="crange" />
+             <input type="hidden" name="campstatus" v-model="campstatus" />
            
         <input type="hidden" name="cexpense" v-model="cexpense" /> 
                 
         <input type="hidden" name="otherinfo" v-model="otherinfo" />
            
            
-                </form>
+                </form> -->
   <div v-if="typepage == 0">
 <div>
+  <form action="/admin/campaign/create" method="post" >
+   <input type="hidden" name="_token" :value="csrf" />
+        <input type="hidden" name="id" v-model="id" />
+        <input type="hidden" name="campaigntitle" v-model="campaigntitle" />
+
+
 
      <div class="float-right">
         <a href="/admin/campaign" class="btn btn-primary"><i class="fa fa-caret-left" aria-hidden="true"></i> Back</a>
@@ -125,14 +133,14 @@
                <div class="d-flex justify-content-end mt-2 ">
                   
                   
-                    <button type="submit"  class="btn btn-success" v-on:click="typepagechange(val)" > Create Campaign</button>
+                    <button type="submit"  class="btn btn-success" > Create Campaign</button>
                </div>
     
            </div>
        </div>
 
 
-
+  </form>
 </div>
 
 
@@ -141,7 +149,7 @@
 
       
 
-   <div v-if="typepage == 1">
+   <!-- <div v-if="typepage == 1">
 
  <div class="float-right">
     <button  v-on:click="typepagechangep(0)" class="btn btn-secondary"><i class="fa fa-caret-left" aria-hidden="true"></i> Back</button>
@@ -215,7 +223,7 @@
             <div class="form-group row mt-2">
     <label for="inputEmail3" class="col-sm-3 col-form-label">Campaign Description<span style="color:red">*</span></label>
     <div class="col-sm-5">
-      <textarea class="form-control" id="exampleFormControlTextarea1" v-model="campaigndes" placeholder="Enter Campaign Description" rows="3"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" :maxlength="max" v-model="campaigndes" placeholder="Enter Campaign Description" rows="3"></textarea>
    
       <small class="text-danger" v-if="this.campaigndes == null">{{errorsecond.campaigndes}}</small>
     </div>
@@ -273,7 +281,8 @@
                          <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Select Category<span style="color:red">*</span></label>
                               <div class="col-sm-5"> 
-                                <multiselect v-model="scategory" :options="catoptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Category" label="category" track-by="category" :preselect-first="false">
+                                <multiselect v-model="scategory" :options="intrest" :multiple="true" :close-on-select="false"
+                                 :clear-on-select="false" :preserve-search="true" placeholder="Select Category" label="name" track-by="name" :preselect-first="false">
                           
                                   </multiselect>
                             
@@ -347,16 +356,9 @@
                          <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Gender<span style="color:red">*</span></label>
                            
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="smgender" id="smgender" v-model="smgender" value="Male">
-                          <label class="form-check-label" for="smgender">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="safgender" id="sfgender"  v-model="sfgender" value="Female">
-                          <label class="form-check-label" for="sfgender">Female</label>
-                        </div>
+                       
 
-                            <!-- <div class="col-sm-3 mt-2">
+                            <div class="col-sm-3 mt-2">
                            <select
                               value=""
                               id="ratecreator"
@@ -366,6 +368,7 @@
                             >
                             
                               <option value="Male">Male</option>
+                               <option value="">No Male</option>
                             
                             </select>
                            </div>
@@ -377,12 +380,12 @@
                              
                               class="form-control form-control-sm"
                             >
-                            
                               <option value="Female">Female</option>
+                              <option value="">No Female</option>
                             
                             </select>
                            </div>
-                           <small class="ml-3">Note : If you want both the male and female to participate in the campaign select male and female.</small> -->
+                           <small class="ml-3">Note : If you want both the male and female to participate in the campaign select male and female.</small>
 
                         </div>
                  </div>
@@ -404,7 +407,7 @@
                          <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Location<span style="color:red">*</span></label>
                             <div class="col-sm-5">
-                         <multiselect v-model="slocation" :options="coptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location"  :preselect-first="false">
+                         <multiselect v-model="slocation" :options="coptions" :multiple="true" :close-on-select="false"  :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location"  :preselect-first="false">
                           
                                   </multiselect>
                            </div>
@@ -490,15 +493,8 @@
                <div v-if="picked8 == 'true'">
                          <div class="form-group row">
                             <label for="sagender" class="col-sm-2 col-form-label">Select Gender<span style="color:red">*</span></label>
-                              <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="samgender" id="samgender" v-model="samgender" value="Male">
-                          <label class="form-check-label" for="samgender">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="safgender" id="safgender"  v-model="safgender" value="Female">
-                          <label class="form-check-label" for="safgender">Female</label>
-                        </div>
-                            <!-- <div class="col-sm-3 mt-2">
+                          
+                            <div class="col-sm-3 mt-2">
                            <select
                               value=""
                               id="ratecreator"
@@ -508,6 +504,7 @@
                             >
                             
                               <option value="Male">Male</option>
+                               <option value="">No Male</option>
                             
                             </select>
                            </div>
@@ -521,11 +518,12 @@
                             >
                             
                               <option value="Female">Female</option>
+                               <option value="">No Female</option>
                             
                             </select>
-                           </div> -->
+                           </div>
                          
-                           <!-- <small class="ml-3 mt-2">Note : If you want both the male and female to participate in the campaign select male and female.</small> -->
+                           <small class="ml-3 mt-2">Note : If you want both the male and female to participate in the campaign select male and female.</small>
 
                         </div>
                  </div>
@@ -600,26 +598,17 @@
                       <div class="form-group row">
                       <label for="pprice" class="col-sm-5 col-form-label">Commercial Range<span style="color:red">*</span></label>
                       
-                        <div class="form-inline">
-                          
-                    <VueSimpleRangeSlider
-                    style="width: 300px"
-                    :min="0"
-                    :max="100000"
-                    :logarithmic="false"
-                    v-model="crange"
-            />
-
-            <!-- <div class="form-check form-check-inline">
-                       
-                          <label class="form-check-label" for="pprice">Rs.{{this.crange[0]}}</label> <label>to</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                       
-                          <label class="form-check-label" for="pprice">Rs.{{this.crange[1]}}</label>
-                        </div> -->
-
-                        </div>
+                         <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="crange">Minimum Range</label>
+                        <input type="number" class="form-control form-control-sm" v-model="crange" name="crange">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="campstatus">Maximum Range</label>
+                        <input type="number" class="form-control form-control-sm" v-model="campstatus" name="campstatus" >
+                      </div>
+                </div>
+                     
                    
                         
                    </div>
@@ -667,14 +656,7 @@
           
           </div>
         
-          <!-- <button
-            type="button"
-            class="btn btn-primary p-2"
-            v-on:click="typepagechange(val)"
-           
-          >
-            <i class="fas fa-save"></i> Save
-          </button> -->
+        
         </div>
 
 
@@ -833,12 +815,12 @@
                 </div>
                   <div class="row mt-2">
                   <div class="col-md-6"><h5>Commercial Range :</h5></div>
-                  <div class="col-6 col-md-4"><h5>{{this.crange}}</h5></div>
+                  <div class="col-6 col-md-4"><h5>Rs.{{this.crange}}  To  Rs.{{this.campstatus}}</h5></div>
                 </div>
                  <div class="row mt-2">
                   <div class="col-md-6"><h5>Commercials will be exclusive of all other expenses such as reimbursement of product or shipping charges ?</h5></div>
                   <div class="col-6 col-md-4">
-                     <h5 v-if="this.cexpense == 'true'">Yes</h5>
+                     <h5 v-if="this.cexpense == '1'">Yes</h5>
                     <h5 v-else>No</h5>
                   </div>
                 </div>
@@ -858,7 +840,7 @@
                   </div>
             </div>
 
-            </div>
+            </div> -->
             
 
 
@@ -871,6 +853,7 @@
 
    
 </template>
+
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <script>
@@ -891,7 +874,8 @@ components: {
       id: null,
       typepage:0,
       number:0,
-     crange: [0,50000],
+     crange: 0,
+      campstatus: 0,
         val:'',
       picked1:null,
         picked2:null,
@@ -899,6 +883,7 @@ components: {
         picked4:null,
           picked5:null,
            picked6:null,
+           max:450,
         picked7:null,
           picked8:null,
              cexpense:null,
@@ -972,22 +957,25 @@ components: {
        ],
       catoptions: [
          { category: 'Automobile'  },
-        { category: 'Music & Dance' },
+         { category: 'Arts' },
         { category: 'Beauty & Make up' },
          { category: 'Business & Startup'  },
         { category: 'Education & Career' },
-        { category: 'Fitness & Health' },
+            { category: 'Entrepreneurship' },
+        { category: 'Health & Lifestyle' },
+          { category: 'Fitness' },
          { category: 'Fashion' },
-         { category: 'Food & Beverage'  },
-        { category: 'Travel' },
-        { category: 'Arts' },
-             { category: 'Lifestyle' },
+         { category: 'Food'  },
+         { category: 'Modeling' },
+          { category: 'Music & Dance' },
         { category: 'Marketing & Social Media' },
-    
         { category: 'Movies, TV & Entertainment' },
+          { category: 'Gaming' },
+       { category: 'Parenting' },
         { category: 'Photography & Videography' },
           { category: 'Society & Politics' },
         { category: 'Sports' },
+         { category: 'Travel' },
          { category: 'Technology' },
         
 
@@ -2304,7 +2292,7 @@ components: {
                       this.selcampobj.push(this.campaignobj[i].name)
                     }
                       for(var i=0;i<this.scategory.length;i++){
-                      this.selcategory.push(this.scategory[i].category)
+                      this.selcategory.push(this.scategory[i].name)
                     }
                        for(var i=0;i<this.sage.length;i++){
                       this.selcage.push(this.sage[i].age)

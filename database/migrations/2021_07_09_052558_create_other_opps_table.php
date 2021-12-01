@@ -18,6 +18,7 @@ class CreateOtherOppsTable extends Migration
             $table->string('otitle');
             $table->longText('odes')->nullable();
             $table->longText('ocontactus');
+            $table->longText('orandom');
             $table->integer('oppstatus')->default(0);//0 Inactive //1 Active
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ Vue.component('v-select', vSelect)
 import 'vue-select/dist/vue-select.css';
 import Multiselect from 'vue-multiselect';
 import VueCountdownTimer from 'vuejs-countdown-timer';
+
 Vue.use(VueCountdownTimer);
 
 // register globally
@@ -35,10 +36,13 @@ Vue.component('newinfluencer', require('./components/Admin/NewInfluencer.vue').d
 
 
 
-//user
+//user-Influencers
+Vue.component('saccount', require('./components/Influencers/SocialAccounts.vue').default);
 Vue.component('profile', require('./components/Influencers/Profile.vue').default);
 Vue.component('campaign', require('./components/Influencers/Campaign.vue').default);
 Vue.component('cstatus', require('./components/Influencers/CampaignStatus.vue').default);
+Vue.component('payment', require('./components/Influencers/Payment.vue').default);
+Vue.component('ooffer', require('./components/Influencers/OtherOffers.vue').default);
 
 
 
@@ -64,6 +68,7 @@ Vue.component('finalize', require('./components/Admin/Campaign/FinalizeV.vue').d
 Vue.component('cperform', require('./components/Admin/Campaign/CPerform.vue').default);
 Vue.component('newcreator', require('./components/Admin/Campaign/NewCreator.vue').default);
 Vue.component('createcamp', require('./components/Admin/Campaign/Create.vue').default);
+Vue.component('cone', require('./components/Admin/Campaign/Createone.vue').default);
 Vue.component('editcamp', require('./components/Admin/Campaign/Edit.vue').default);
 
 

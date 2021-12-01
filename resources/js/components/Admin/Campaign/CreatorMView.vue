@@ -3,7 +3,15 @@
              <div class="float-right mb-2">
               <a :href="'/admin/campaign/newcreator/' + data.id" class="btn btn-link"  ><i class="fa fa-caret-left" aria-hidden="true"></i> Add new creator</a>
           </div>
-           <table  class="table mt-3 table-responsive-sm">
+                 
+      <!-- <form :action="'/admin/campaign/view/savecm/' + data.id" method="POST">
+          <input type="hidden" name="_token" :value="csrf" />
+         <div class="float-right mb-2">
+           <button type="submit" class="btn btn-success">Save Creators</button>
+          </div>
+
+      </form> -->
+           <table  class="table mt-3 table-responsive">
      <thead>
        <tr class="text-center">
               <th>UID</th>
@@ -43,52 +51,54 @@
         
        </tr>
      </thead>
-     <tbody>
+     <tbody>  
  
-       <tr class="text-center" v-for="item in influencers">
+       <tr class="text-center" v-for="item in influencer">
+
+       
         
-           <td class="align-middle">
+           <td class="align-middle" v-for="row in item.inf">
           
-              <a :href="'/admin/influencer/edit/' + item.iid"> {{item.iid}}</a>
+              <a :href="'/admin/influencer/edit/' + row.iid"> {{row.iid}}</a>
            </td>
-         <td class="align-middle">
-            {{item.name}}
+         <td class="align-middle" v-for="row in item.user">
+            {{row.name}}
            </td>
-            <td class="align-middle">
-            {{item.gender}}
+            <td class="align-middle" v-for="row in item.inf">
+            {{row.gender}}
            </td>
-         <td class="align-middle">
-         {{JSON.parse(item.intrest)}}
+         <td class="align-middle" v-for="row in item.inf">
+         {{JSON.parse(row.intrest)}}
          </td>
-          <td class="align-middle">
-         {{item.inftype}}
+          <td class="align-middle" v-for="row in item.inf">
+         {{row.inftype}}
          </td>
          
-         <td class="align-middle">
-       {{item.city}}  
+         <td class="align-middle" v-for="row in item.inf">
+       {{row.city}}  
        </td>
-        <td class="align-middle">
-          {{item.email}}
+        <td class="align-middle" v-for="row in item.user">
+          {{row.email}}
        </td>
-        <td class="align-middle">
-          {{item.phone}}
+        <td class="align-middle" v-for="row in item.inf">
+          {{row.phone}}
        </td>
        
-        <td class="align-middle">
-          <span v-if="item.profilestatus ==0">
+        <td class="align-middle" v-for="row in item.user">
+          <span v-if="row.profilestatus ==0">
           Not Approved
           </span>
-             <span v-if="item.profilestatus ==1">
+             <span v-if="row.profilestatus ==1">
           Approved
           </span>
-               <span v-if="item.profilestatus ==2">
+               <span v-if="row.profilestatus ==2">
           Rejected
           </span>
 
        </td>
          <td
-         class="align-middle">
-         <span v-if="item.verified == 0">
+         class="align-middle" v-for="row in item.user">
+         <span v-if="row.verified == 0">
            No
           </span>
           <span v-else>
@@ -96,14 +106,14 @@
           </span>
 
        </td>
-           <td class="align-middle">
-             {{item.iaudienceloc}}
+           <td class="align-middle" v-for="row in item.insta">
+             {{row.iaudienceloc}}
          </td>
-          <td class="align-middle">
-          {{item.iaudienceage}}
+          <td class="align-middle" v-for="row in item.insta">
+          {{row.iaudienceage}}
          </td>
-           <td class="align-middle">
-         {{item.iaudiencegen}}
+           <td class="align-middle" v-for="row in item.insta">
+         {{row.iaudiencegen}}
          </td>
       
   

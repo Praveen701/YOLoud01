@@ -5,10 +5,10 @@
 
     <div class="card mt-5" style="max-width: 950px; margin: 0 auto;float: none;">
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="{{asset('img/3545757.jpg')}}" alt="" width="383" height="450">
+          <div class="col-md-5">
+            <img src="{{asset('img/3545757.jpg')}}" alt="" class="logimg">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="card-body text-center">
               <h2 class="card-title">Sign Up</h2>
               <form method="POST" action="{{ route('register') }}" class="mt-4">

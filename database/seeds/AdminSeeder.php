@@ -15,10 +15,10 @@ class AdminSeeder extends Seeder
     {
         $data= new User;
         $data->name='Admin';
-        $data->email='admin@admin.com';
-        $data->password=Hash::make('7890poiu');
+        $data->email='accounts@yoloud.com';
+        $data->password=Hash::make('accounts@1516');
         $data->type=1;
-        $data->status=1;
+        $data->profilestatus=0;
         $data->save();
     }
 }

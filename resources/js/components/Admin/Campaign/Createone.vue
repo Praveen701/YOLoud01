@@ -1,0 +1,2383 @@
+<template>
+    <div >
+
+
+    <form :action="'/admin/campaign/createone/' + datas.id " method="post" id="campaignform">
+       <input type="hidden" name="_token" :value="csrf" />
+        <input type="hidden" name="id" v-model="id" />
+        <input type="hidden" name="campaigntitle" v-model="datas.campaigntitle" />
+      <input type="hidden" name="campaignobj" v-model="result1" />
+        <input type="hidden" name="campaigndes" v-model="datas.campaigndes" />
+
+        <input type="hidden" name="startdate" v-model="datas.startdate" />
+           
+        <input type="hidden" name="enddate" v-model="datas.enddate" />
+           
+             <input type="hidden" name="picked1" v-model="datas.picked1" />
+      
+            <input type="hidden" name="picked2" v-model="datas.picked2" />
+      
+            <input type="hidden" name="picked3" v-model="datas.picked3" />
+           
+       
+            <input type="hidden" name="picked4" v-model="datas.picked4" />
+       
+            <input type="hidden" name="picked5" v-model="datas.picked5" />
+           
+      
+            <input type="hidden" name="picked6" v-model="datas.picked6" />
+      
+            <input type="hidden" name="picked7" v-model="datas.picked7" />
+           
+     
+            <input type="hidden" name="picked8" v-model="datas.picked8" />
+           
+
+        <input type="hidden" name="scategory" v-model="result2" />
+        <input type="hidden" name="stype" v-model="result3" />
+           
+        <input type="hidden" name="sage" v-model="result4" />
+        <input type="hidden" name="smgender" v-model="datas.smgender" />
+         <input type="hidden" name="sfgender" v-model="datas.sfgender" />
+           
+        <input type="hidden" name="slocation" v-model="result6" />
+              <input type="hidden" name="salocation" v-model="result7" />
+        <input type="hidden" name="saage" v-model="result8" />
+           
+        <input type="hidden" name="samgender" v-model="datas.samgender" />
+         <input type="hidden" name="safgender" v-model="datas.safgender" />
+           
+
+           
+         <input type="hidden" name="pproduct" v-model="datas.pproduct" />
+                 
+        <input type="hidden" name="orderedby" v-model="datas.orderedby" />
+           
+        <input type="hidden" name="pprice" v-model="datas.pprice" />
+         <input type="hidden" name="crange" v-model="datas.crange" />
+          <input type="hidden" name="campstatus" v-model="datas.campstatus" />
+           
+        <input type="hidden" name="cexpense" v-model="datas.cexpense" /> 
+                
+        <input type="hidden" name="otherinfo" v-model="datas.otherinfo" />
+           
+           
+                </form>
+
+                 <div v-if="typepage == 0">
+<div>
+
+     <div class="float-right">
+        <a href="/admin/campaign" class="btn btn-primary"><i class="fa fa-caret-left" aria-hidden="true"></i> Back</a>
+    </div>
+    <h3 class="mt-4">Campaign  </h3>
+       <div class="card mt-4 text-dark">
+           <div class="card-body">
+
+
+                
+              
+               
+               <div class="row mt-2">
+                   <div class="col-sm-12 mt-2 col-md-3">
+                    
+                           <label for="id">UID</label>
+               
+                        <v-select
+                                    name="id"
+                                    label="id"
+                                    v-model="brands.id"
+                                  
+                                   
+                                disabled>
+                                  
+                                </v-select>
+                               
+                             
+                   </div>
+                   <div class="col-sm-12 mt-2 col-md-3">
+                  
+                           <label for="companyname">Company Name</label>
+                        
+                    
+                  
+                               <v-select
+                                    label="companyname"
+                                    v-model="brands.companyname"
+                           
+                                    @input="code => setcampaign(code)"
+                                disabled>
+                                    <template #search="{attributes, events}">
+                                        <input
+                                            class="vs__search"
+                                            :required="!companyname"
+                                            v-bind="attributes"
+                                            v-on="events"
+                                               
+                                        />
+                                    </template>
+                                </v-select>
+                                 <small class="text-danger" v-if="this.brands.companyname == null">Select Company Name</small>
+
+                   </div>
+
+                   <div class="col-sm-12 mt-2 col-md-3">
+                       <div class="form-group">
+                           <label for="campaigntitle">Campaign Title <span style="color:red">*</span></label>
+                           <input  type="text" class="form-control" v-model="datas.campaigntitle" placeholder="Enter Campaign Title" required>
+                          <small class="text-danger" v-if="this.datas.campaigntitle == ''">Enter the Campaign Title</small>
+
+                      
+                       </div>
+                     
+                   </div>
+                 
+               </div>
+            
+               <div class="d-flex justify-content-end mt-2 ">
+                  
+                  
+                    <button type="submit"  class="btn btn-success" v-on:click="typepagechange(1)"> Update Campaign</button>
+               </div>
+    
+           </div>
+       </div>
+
+
+
+</div>
+
+
+
+  </div>
+
+       <div v-if="typepage == 1">
+
+
+
+      
+ <div class="float-right">
+    <button v-on:click="typepagechangep(0)" class="btn btn-secondary"><i class="fa fa-caret-left" aria-hidden="true"></i> Back</button>
+</div>
+<h2 class="mt-3 mb-4">Campaign</h2> 
+
+
+        <div class=" mt-2 card">
+  <div  class="card-body text-dark">
+   
+<h4 class="mb-4">Campaign : {{datas.campaigntitle}}</h4> 
+      
+
+
+
+
+        <div class="text-right">
+          <ul class="nav text-left">
+            <li class="nav-item">
+              <a
+                class="nav-link btn"
+                v-on:click="changePage(0)"
+                v-bind:style="page == 0 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
+              >
+                <h4>Basic Details</h4></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn"
+                v-on:click="changePage(1)"
+                v-bind:style="page == 1 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
+              >
+                <h4>Creator Preference</h4></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn"
+                v-on:click="changePage(2)"
+                v-bind:style="page == 2 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
+              >
+                <h4>Audience Preference</h4></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn"
+                v-on:click="changePage(3)"
+                v-bind:style="page == 3 ? 'color:#DDA05D;' : 'color:#01AFBA;'"
+              >
+                <h4>Commercial & Other Details</h4></a
+              >
+            </li>
+       
+          </ul>
+          <div class="container-fluid text-left">
+            <span v-if="page == 0">
+              <div class="mt-4">
+             <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 col-form-label">Campaign Objective<span style="color:red">*</span></label>
+    <div class="col-sm-5">
+           
+               <multiselect v-model="result1"  :options="options"   :multiple="true"  :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Campaign Objective"  :preselect-first="false">
+               <!-- <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template> -->
+               </multiselect>   
+               <small class="text-danger" v-if="this.result1 == ''">Select Campaign Objective</small>
+              
+               
+            </div>
+          </div>
+    
+            <div class="form-group row mt-2">
+    <label for="inputEmail3" class="col-sm-3 col-form-label">Campaign Description<span style="color:red">*</span></label>
+    <div class="col-sm-5">
+      <textarea class="form-control" id="exampleFormControlTextarea1" :maxlength="max" v-model="datas.campaigndes" placeholder="Enter Campaign Description" rows="3"></textarea>
+       <small class="text-danger" v-if="this.datas.campaigndes == ''">Enter the Campaign Description</small>
+    </div>
+  
+  </div>
+ 
+  
+       <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 col-form-label">Application Start Date<span style="color:red">*</span></label>
+    <div class="col-sm-5">
+      <input type="date" class="form-control" v-model="datas.startdate" id="inputEmail3">
+        <small class="text-danger" v-if="this.datas.startdate == ''">Select the Application Start Date </small>
+    </div>
+  </div>
+       <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 col-form-label">Application End Date<span style="color:red">*</span></label>
+    <div class="col-sm-5">
+      <input type="date" class="form-control" v-model="datas.enddate" id="inputEmail3">
+         <small class="text-danger" v-if="this.datas.enddate == ''">Select the Application End Date </small>
+    </div>
+  </div>
+  
+              </div>
+  
+
+                  <div class="float-right">
+                     <button
+            type="button"
+            class="btn btn-primary p-2"
+            v-on:click="changePage(1)"
+           
+          >
+            <i class="fas fa-save"></i> Save & Continue
+          </button>
+                      </div>
+
+            </span>
+
+            <span v-else-if="page == 1">
+             <div class="mt-4">
+             <div class="form-group row">
+                      <label for="inputEmail3" class="col-sm-4 col-form-label">Do you have any preference for Category ?</label>
+                  
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" v-model="datas.picked1" value="true">
+                          <label class="form-check-label" for="inlineRadio1">Yes</label>
+                        </div>
+                     
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions"   v-model="datas.picked1"  value="false">
+                          <label class="form-check-label" for="inlineRadio2">No</label>
+                        </div>
+                       
+              </div>
+          
+               <div v-if="datas.picked1 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Category<span style="color:red">*</span></label>
+                              <div class="col-sm-5"> 
+                                <multiselect v-model="result2" :options="intrest" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Category"  :preselect-first="false">
+                          
+                                  </multiselect>
+                                 
+                            
+
+                           </div>
+                        </div>
+                 </div>
+                <div class="form-group row">
+                      <label for="type" class="col-sm-4 col-form-label">Do you have any preference for Creator Type ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked2" v-model="datas.picked2" value="true">
+                          <label class="form-check-label" for="type">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked2" v-model="datas.picked2" value="false">
+                          <label class="form-check-label" for="type">No</label>
+                        </div>
+                       
+              </div>
+                <div v-if="datas.picked2 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Type<span style="color:red">*</span></label>
+                            <div class="col-sm-5">
+                    <multiselect v-model="result3" :options="toptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Type"  :preselect-first="false">
+                          
+                                  </multiselect>
+                           </div>
+                        </div>
+                 </div>
+
+                 <div class="form-group row">
+                      <label for="age" class="col-sm-4 col-form-label">Do you have any preference for Creator Age ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked3" v-model="datas.picked3" value="true">
+                          <label class="form-check-label" for="age">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked3" v-model="datas.picked3" value="false">
+                          <label class="form-check-label" for="age">No</label>
+                        </div>
+                       
+              </div>
+                <div v-if="datas.picked3 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Age<span style="color:red">*</span></label>
+                            <div class="col-sm-5">
+                        <multiselect v-model="result4" :options="aoptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Age"  :preselect-first="false">
+                          
+                                  </multiselect>
+                           </div>
+                        </div>
+                 </div>
+
+                 
+                 <div class="form-group row">
+                      <label for="gender" class="col-sm-4 col-form-label">Do you have any preference for Creator Gender ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked4" v-model="datas.picked4" value="true">
+                          <label class="form-check-label" for="gender">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked4" v-model="datas.picked4" value="false">
+                          <label class="form-check-label" for="gender">No</label>
+                        </div>
+                       
+              </div>
+                <div v-if="datas.picked4 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Gender<span style="color:red">*</span></label>
+                       <!-- <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="smgender" id="smgender" v-model="datas.smgender" value="Male">
+                          <label class="form-check-label" for="smgender">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="safgender" id="sfgender"  v-model="datas.sfgender" value="Female">
+                          <label class="form-check-label" for="sfgender">Female</label>
+                        </div> -->
+                             <div class="col-sm-3 mt-2">
+                           <select
+                              value=""
+                              id="ratecreator"
+                              v-model="datas.smgender"
+                             
+                              class="form-control form-control-sm"
+                            >
+                            
+                              <option value="Male">Male</option>
+                               <option value="">No Male</option>
+                            
+                            </select>
+                           </div>
+                             <div class="col-sm-3 mt-2">
+                           <select
+                              value=""
+                              id="ratecreator"
+                              v-model="datas.sfgender"
+                             
+                              class="form-control form-control-sm"
+                            >
+                            
+                              <option value="Female">Female</option>
+                               <option value="">No Female</option>
+                            
+                            </select>
+                           </div>
+                           <small class="ml-3 mt-2">Note : If you want both the male and female to participate in the campaign select male and female.</small>
+
+                        </div>
+                 </div>
+
+                   <div class="form-group row">
+                      <label for="location" class="col-sm-4 col-form-label">Do you have any preference for Creator Location ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked5" v-model="datas.picked5" value="true">
+                          <label class="form-check-label" for="location">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="picked5" v-model="datas.picked5" value="false">
+                          <label class="form-check-label" for="location">No</label>
+                        </div>
+                       
+              </div>
+                <div v-if="datas.picked5 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Creator Location<span style="color:red">*</span></label>
+                            <div class="col-sm-5">
+                         <multiselect v-model="result6" :options="coptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location"  :preselect-first="false">
+                          
+                                  </multiselect>
+                           </div>
+                        </div>
+                 </div>    
+
+
+            </div> 
+                <div class="float-right">
+                          <button
+                  type="button"
+                  class="btn btn-primary p-2"
+                  v-on:click="changePage(2)"
+                
+                >
+                  <i class="fas fa-save"></i> Save & Continue
+                </button>
+                      </div>
+            </span>
+            <span v-else-if="page == 2" class="containerr-fluid">
+               <div class="mt-4">
+             <div class="form-group row">
+                      <label for="alocation" class="col-sm-5 col-form-label">Do you have any preference for Audience's Location ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="alocation" v-model="datas.picked6" value="true">
+                          <label class="form-check-label" for="alocation">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="alocation" v-model="datas.picked6" value="false">
+                          <label class="form-check-label" for="alocation">No</label>
+                        </div>
+                       
+              </div>
+               <div v-if="datas.picked6 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Location<span style="color:red">*</span></label>
+                            <div class="col-sm-5">
+                      <multiselect v-model="result7" :options="coptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Location"  :preselect-first="false">
+                          
+                                  </multiselect>
+                           </div>
+                        </div>
+                 </div>
+
+                 <div class="form-group row">
+                      <label for="aage" class="col-sm-5 col-form-label">Do you have any preference for Audience's Age ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="aage" v-model="datas.picked7" value="true">
+                          <label class="form-check-label" for="aage">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="aage" v-model="datas.picked7" value="false">
+                          <label class="form-check-label" for="aage">No</label>
+                        </div>
+                       
+              </div>
+               <div v-if="datas.picked7 == 'true'">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Age<span style="color:red">*</span></label>
+                            <div class="col-sm-5">
+         <multiselect v-model="result8" :options="aoptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Age" :preselect-first="false">
+                          
+                                  </multiselect>
+                           </div>
+                        </div>
+                 </div>
+
+                    <div class="form-group row">
+                      <label for="agender" class="col-sm-5 col-form-label">Do you have any preference for Audience's Gender ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="agender" v-model="datas.picked8" value="true">
+                          <label class="form-check-label" for="alocation">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="agender" v-model="datas.picked8" value="false">
+                          <label class="form-check-label" for="agender">No</label>
+                        </div>
+                       
+              </div>
+               <div v-if="datas.picked8 == 'true'">
+                         <div class="form-group row">
+                            <label for="agender" class="col-sm-2 col-form-label">Select Gender<span style="color:red">*</span></label>
+                        <!-- <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="samgender" id="samgender" v-model="datas.samgender" value="Male">
+                          <label class="form-check-label" for="samgender">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="safgender" id="safgender"  v-model="datas.safgender" value="Female">
+                          <label class="form-check-label" for="safgender">Female</label>
+                        </div> -->
+                            <div class="col-sm-3 mt-2">
+                           <select
+                              value=""
+                              id="ratecreator"
+                              v-model="datas.samgender"
+                             
+                              class="form-control form-control-sm"
+                            >
+                            
+                              <option value="Male">Male</option>
+                                 <option value="">No Male</option>
+                            
+                            </select>
+                           </div>
+                             <div class="col-sm-3 mt-2">
+                           <select
+                              value=""
+                              id="ratecreator"
+                              v-model="datas.safgender"
+                             
+                              class="form-control form-control-sm"
+                            >
+                            
+                              <option value="Female">Female</option>
+                               <option value="">No Female</option>
+                            
+                            </select>
+                           </div>
+                           <small class="ml-3 mt-2">Note : If you want both the male and female to participate in the campaign select male and female.</small>
+
+                        </div>
+                 </div>
+
+           </div>
+               <div class="float-right">
+                     <button
+            type="button"
+            class="btn btn-primary p-2"
+            v-on:click="changePage(3)"
+           
+          >
+            <i class="fas fa-save"></i> Save & Continue
+          </button>
+                      </div>
+            </span>
+
+            <span v-else-if="page == 3">
+
+          <div class="mt-4">
+             <div class="form-group row">
+                      <label for="alocation" class="col-sm-5 col-form-label">Will the creator require physical product for the content ?</label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="alocation" v-model="datas.pproduct" value="true">
+                          <label class="form-check-label" for="alocation">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" v-model="datas.pproduct" value="false">
+                          <label class="form-check-label" for="alocation">No</label>
+                        </div>
+                       
+              </div>
+               <div v-if="datas.pproduct == 'true'">
+                       <div class="form-group row">
+                      <label for="ordered" class="col-sm-5 col-form-label">Product will be ordered by ?<span style="color:red">*</span></label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="ordered" v-model="datas.orderedby"  value="creator">
+                          <label class="form-check-label" for="alocation">Creator</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="ordered"  v-model="datas.orderedby" value="brand">
+                          <label class="form-check-label" for="alocation">Brand</label>
+                        </div>
+                       
+              </div>
+                 </div>
+
+
+                 <div v-if="datas.orderedby == 'creator' && datas.pproduct == 'true'">
+              <div class="form-group row">
+                      <label for="pprice" class="col-sm-5 col-form-label">Will the product price be reimbursed ?<span style="color:red">*</span></label>
+                      
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="pprice" v-model="datas.pprice" value="true">
+                          <label class="form-check-label" for="pprice">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="pprice" v-model="datas.pprice" value="false">
+                          <label class="form-check-label" for="pprice">No</label>
+                        </div>
+                       
+                   </div>
+                 </div>
+                      <div class="form-group row">
+                      <label for="pprice" class="col-sm-5 col-form-label">Commercial Range<span style="color:red">*</span></label>
+                      
+
+                         <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="crange">Minimum Range</label>
+                        <input type="number" class="form-control form-control-sm" v-model="datas.crange" name="crange">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="campstatus">Maximum Range</label>
+                        <input type="number" class="form-control form-control-sm" v-model="datas.campstatus" name="campstatus" >
+                      </div>
+                </div>
+
+                        <!-- <div class="form-inline">
+                          
+                    <VueSimpleRangeSlider
+                    style="width: 300px"
+                    :min="0"
+                    :max="1000000"
+                    :logarithmic="false"
+                    v-model="crangeres"
+            />
+                        </div> -->
+                   
+                        
+                   </div>
+
+                     <div class="form-group row">
+                      <label for="shipping" class="col-sm-5 col-form-label">Commercial will be exclusive of all other expenses such as reimbusement of Product or shipping charges ? <span style="color:red">*</span></label>
+                       
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="shipping" v-model="datas.cexpense" value="1">
+                          <label class="form-check-label" for="shipping">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="shipping" v-model="datas.cexpense" value="0">
+                          <label class="form-check-label" for="shipping">No</label>
+                        </div>
+                       
+                   </div>
+                          <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Any other information that you want to share regarding commercial ?</label>
+                    <div class="col-sm-5">
+                      <textarea class="form-control" v-model="datas.otherinfo" id="exampleFormControlTextarea1" placeholder="1000 Characters allowed" rows="3"></textarea>
+                    </div>
+                  </div>             
+
+            </div>
+                <div class="float-right">
+                     <button
+            type="button"
+            class="btn btn-primary p-2"
+            v-on:click="typepagechangepre(val)"
+           
+          >
+            <i class="fas fa-save"></i> Save & Preview
+          </button>
+                      </div>
+            </span>
+          
+          </div>
+       
+       
+        </div>
+
+
+
+
+
+
+
+
+
+  </div>
+        </div>
+  
+    </div>
+
+                        <div v-if="typepage == 2">
+                                  
+                  <div class="float-right">
+                      <button v-on:click="typepagechangep(1)" class="btn btn-primary"><i class="fa fa-pen" aria-hidden="true"></i> Edit</button>
+                  </div>
+              
+            <h2 class="mt-3 mb-4">Preview Campaign</h2>
+              
+            <div class=" mt-2 card">
+            <div  class="card-body text-dark">
+                <div class="row mt-2">
+                  <div class="col-3"><h5>Campaign Name:</h5></div>
+                  <div class="col-9"><h5>{{this.datas.campaigntitle}}</h5></div>
+                </div>
+                  <div class="row mt-2">
+                  <div class="col-3"><h5>Campaign Objective:</h5></div>
+                  <div class="col-9"><h5>{{this.result1.toString()}}</h5></div>
+                </div>
+                    <div class="row mt-2">
+                  <div class="col-3"><h5>Campaign Description:</h5></div>
+                  <div class="col-9"><h5>{{this.datas.campaigndes}}</h5></div>
+                </div>
+                  <div class="row mt-2">
+                  <div class="col-3"><h5>Application Start Date:</h5></div>
+                  <div class="col-9"><h5>{{this.datas.startdate}}</h5></div>
+                </div>
+                     <div class="row mt-2">
+                  <div class="col-3"><h5>Application End Date:</h5></div>
+                  <div class="col-9"><h5>{{this.datas.enddate}}</h5></div>
+                </div>
+                 <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for category?</h5></div>
+                     <div class="col-6 col-md-4">
+                    <h5 v-if="this.datas.picked1 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked1 == 'true'">
+                  <div class="col-md-6"><h5>Category</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.result2.toString()}}</h5></div>
+                </div>
+
+                  <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Creator Type?</h5></div>
+                  <div class="col-6 col-md-4">
+                    <h5 v-if="this.datas.picked2 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked2 == 'true'">
+                  <div class="col-md-6"><h5>Creator Type</h5></div>
+                  <div class="col-6 col-md-4"><h5> {{this.result3.toString()}}</h5></div>
+                </div>
+                  <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Creator Age?</h5></div>
+                  <div class="col-6 col-md-4">
+                       <h5 v-if="this.datas.picked3 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked3 == 'true'">
+                  <div class="col-md-6"><h5>Creator Age</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.result4.toString()}}</h5></div>
+                </div>
+                   <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Creator Gender?</h5></div>
+                  <div class="col-6 col-md-4">
+                   <h5 v-if="this.datas.picked4 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked4 == 'true'">
+                  <div class="col-md-6"><h5>Creator Gender</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.datas.smgender}},{{this.datas.sfgender}}</h5></div>
+                </div>
+                     <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Creator Location?</h5></div>
+                  <div class="col-6 col-md-4">
+                    <h5 v-if="this.datas.picked5 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked5 == 'true'">
+                  <div class="col-md-6"><h5>Creator Location</h5></div>
+                  <div class="col-6 col-md-4"><h5> {{this.result6.toString()}}</h5></div>
+                </div>
+                     <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Audience's Location?</h5></div>
+                  <div class="col-6 col-md-4">
+                     <h5 v-if="this.datas.picked6 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked6 == 'true'">
+                  <div class="col-md-6"><h5>Audience Location</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.result7.toString()}} </h5></div>
+                </div>
+                     <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Audience's Age?</h5></div>
+                  <div class="col-6 col-md-4">
+                    <h5 v-if="this.datas.picked7 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked7 == 'true'">
+                  <div class="col-md-6"><h5>Audience Age</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.result8.toString()}}</h5></div>
+                </div>
+                     <div class="row mt-2">
+                  <div class="col-md-6"><h5>Do you have any preference for Audience's Gender?</h5></div>
+                  <div class="col-6 col-md-4">
+                     <h5 v-if="this.datas.picked8 == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                  <div class="row mt-2" v-if="this.datas.picked8 == 'true'">
+                  <div class="col-md-6"><h5>Audience Gender</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.datas.samgender}},{{this.datas.safgender}}</h5></div>
+                </div>
+                    <div class="row mt-2">
+                  <div class="col-md-6"><h5>Will the creator require physical product for the content ?</h5></div>
+                  <div class="col-6 col-md-4">
+                        <h5 v-if="this.datas.pproduct == 'true'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+              
+               
+                     <div class="row mt-2" v-if="this.datas.pproduct == 'true'">
+                  <div class="col-md-6"><h5>Products will be ordered by?</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.datas.orderedby}}</h5></div>
+                </div>
+                    <div class="row mt-2" v-if="this.orderedby == 'creator' && this.datas.pproduct == 'true'">
+                  <div class="col-md-6"><h5>Will the product price be reimbursed?</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.datas.pprice}}</h5></div>
+                </div>
+                  <div class="row mt-2">
+                  <div class="col-md-6"><h5>Commercial Range :</h5></div>
+                  <div class="col-6 col-md-4"><h5>Rs.{{this.datas.crange}}  To  Rs.{{this.datas.campstatus}}</h5></div>
+                </div>
+                 <div class="row mt-2">
+                  <div class="col-md-6"><h5>Commercials will be exclusive of all other expenses such as reimbursement of product or shipping charges ?</h5></div>
+                  <div class="col-6 col-md-4">
+                     <h5 v-if="this.datas.cexpense == '1'">Yes</h5>
+                    <h5 v-else>No</h5>
+                  </div>
+                </div>
+                    <div class="row mt-2">
+                  <div class="col-md-6"><h5>Commercials will be exclusive of all other expenses such as reimbursement of product or shipping charges ?</h5></div>
+                  <div class="col-6 col-md-4">
+                     <h5>Yes</h5>
+                    
+                  </div>
+                </div>
+                   <div class="row mt-2">
+                  <div class="col-md-6"><h5>Other Info :</h5></div>
+                  <div class="col-6 col-md-4"><h5>{{this.datas.otherinfo}}</h5></div>
+                </div>
+
+                      <div class="float-right">
+                          <button v-on:click="save" class="btn btn-success"> Activate</button>
+                      </div>
+
+
+                    
+   
+                  </div>
+            </div>
+
+            </div>
+
+    </div>
+</template>
+
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<script>
+import VueSimpleRangeSlider from 'vue-simple-range-slider';
+import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css';
+export default {
+components: {
+    VueSimpleRangeSlider
+  },
+  props: ['data','brand','intrest'],
+  data() {
+    return {
+       csrf: document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+      page:0,
+      datas:this.data,
+      brands:this.brand,
+     companyname: '',
+      id: '',
+      typepage:1,
+      number:0,
+      max:450,
+     crange: this.crange,
+        val:'',
+      picked1:'',
+          errorfirst:{
+                companyname:'',
+                id:'',
+                campaigntitle:'',
+            } ,     
+            errorsecond:{
+                campaigndes:'',
+                campaignobj:'',
+                startdate:'',
+                enddate:'',
+            } , 
+            errorlast:{
+              cexpense:''
+            },
+        picked2:'',
+          picked3:'',
+        picked4:'',
+          picked5:'',
+           picked6:'',
+        picked7:'',
+          picked8:'',
+             cexpense:'',
+             pprice:'',
+             orderedby:'',
+             pproduct:'',
+             campaigntitle:null,
+             campaigndes:'',
+             campaignobj:[],
+ 
+            result1:'',
+            // result2:'',
+            result3:'',
+            result4:'',
+            result5:'',
+            result6:'',
+            result7:'',
+            result8:'',
+            result9:'',
+            crangeres:'',
+
+             startdate:'',
+             enddate:'',
+             otherinfo:'',
+              result2:this.data.scategory
+       ? this.data.scategory.split(",")
+        : [],
+           
+        
+      
+             
+        
+
+       options: [
+          'Brand Awarness'  ,
+         'Increase Traffic' ,
+         'Brand Mentions' ,
+         'Product Reviews' ,
+     'Giveaways'
+       ],
+      catoptions: [
+        'Dance'  ,
+       'Music' ,
+        'Fashion' ,
+         'Food'  ,
+        'Travel' ,
+       'Art' ,
+      ],
+       toptions: [
+       'Nano'  ,
+      'Micro' ,
+       'Macro' ,
+         'Mega'  ,
+      ],
+       aoptions: [
+         '18-24'  ,
+        '25-32' ,
+      '33-40' ,
+         '40+'  ,
+     
+      ],
+       goptions: [
+      'Male'  ,
+     'Female' ,
+    
+      ],
+         
+        coptions: [
+           "Achalpur",
+  "Achhnera",
+  "Adalaj",
+  "Adilabad",
+  "Adityapur",
+  "Adoni",
+  "Adoor",
+  "Adra",
+  "Adyar",
+  "Afzalpur",
+  "Agartala",
+  "Agra",
+  "Ahmedabad",
+  "Ahmednagar",
+  "Aizawl",
+  "Ajmer",
+  "Akola",
+  "Akot",
+  "Alappuzha",
+  "Aligarh",
+  "AlipurdUrban Agglomerationr",
+  "Alirajpur",
+  "Allahabad",
+  "Alwar",
+  "Amalapuram",
+  "Amalner",
+  "Ambejogai",
+  "Ambikapur",
+  "Amravati",
+  "Amreli",
+  "Amritsar",
+  "Amroha",
+  "Anakapalle",
+  "Anand",
+  "Anantapur",
+  "Anantnag",
+  "Anjangaon",
+  "Anjar",
+  "Ankleshwar",
+  "Arakkonam",
+  "Arambagh",
+  "Araria",
+  "Arrah",
+  "Arsikere",
+  "Aruppukkottai",
+  "Arvi",
+  "Arwal",
+  "Asansol",
+  "Asarganj",
+  "Ashok Nagar",
+  "Athni",
+  "Attingal",
+  "Aurangabad",
+  "Aurangabad",
+  "Azamgarh",
+  "Bagaha",
+  "Bageshwar",
+  "Bahadurgarh",
+  "Baharampur",
+  "Bahraich",
+  "Balaghat",
+  "Balangir",
+  "Baleshwar Town",
+  "Ballari",
+  "Balurghat",
+  "Bankura",
+  "Bapatla",
+  "Baramula",
+  "Barbil",
+  "Bargarh",
+  "Barh",
+  "Baripada Town",
+  "Barmer",
+  "Barnala",
+  "Barpeta",
+  "Batala",
+  "Bathinda",
+  "Begusarai",
+  "Belagavi",
+  "Bellampalle",
+  "Belonia",
+  "Bengaluru",
+  "Bettiah",
+  "BhabUrban Agglomeration",
+  "Bhadrachalam",
+  "Bhadrak",
+  "Bhagalpur",
+  "Bhainsa",
+  "Bharatpur",
+  "Bharuch",
+  "Bhatapara",
+  "Bhavnagar",
+  "Bhawanipatna",
+  "Bheemunipatnam",
+  "Bhilai Nagar",
+  "Bhilwara",
+  "Bhimavaram",
+  "Bhiwandi",
+  "Bhiwani",
+  "Bhongir",
+  "Bhopal",
+  "Bhubaneswar",
+  "Bhuj",
+  "Bikaner",
+  "Bilaspur",
+  "Bobbili",
+  "Bodhan",
+  "Bokaro Steel City",
+  "Bongaigaon City",
+  "Brahmapur",
+  "Buxar",
+  "Byasanagar",
+  "Chaibasa",
+  "Chalakudy",
+  "Chandausi",
+  "Chandigarh",
+  "Changanassery",
+  "Charkhi Dadri",
+  "Chatra",
+  "Chennai",
+  "Cherthala",
+  "Chhapra",
+  "Chhapra",
+  "Chikkamagaluru",
+  "Chilakaluripet",
+  "Chirala",
+  "Chirkunda",
+  "Chirmiri",
+  "Chittoor",
+  "Chittur-Thathamangalam",
+  "Coimbatore",
+  "Cuttack",
+  "Dalli-Rajhara",
+  "Darbhanga",
+  "Darjiling",
+  "Davanagere",
+  "Deesa",
+  "Dehradun",
+  "Dehri-on-Sone",
+  "Delhi",
+  "Deoghar",
+  "Dhamtari",
+  "Dhanbad",
+  "Dharmanagar",
+  "Dharmavaram",
+  "Dhenkanal",
+  "Dhoraji",
+  "Dhubri",
+  "Dhule",
+  "Dhuri",
+  "Dibrugarh",
+  "Dimapur",
+  "Diphu",
+  "Dumka",
+  "Dumraon",
+  "Durg",
+  "Eluru",
+  "English Bazar",
+  "Erode",
+  "Etawah",
+  "Faridabad",
+  "Faridkot",
+  "Farooqnagar",
+  "Fatehabad",
+  "Fatehpur Sikri",
+  "Fazilka",
+  "Firozabad",
+  "Firozpur Cantt.",
+  "Firozpur",
+  "Forbesganj",
+  "Gadwal",
+  "Gandhinagar",
+  "Gangarampur",
+  "Ganjbasoda",
+  "Gaya",
+  "Giridih",
+  "Goalpara",
+  "Gobichettipalayam",
+  "Gobindgarh",
+  "Godhra",
+  "Gohana",
+  "Gokak",
+  "Gooty",
+  "Gopalganj",
+  "Gudivada",
+  "Gudur",
+  "Gumia",
+  "Guntakal",
+  "Guntur",
+  "Gurdaspur",
+  "Gurgaon",
+  "Guruvayoor",
+  "Guwahati",
+  "Gwalior",
+  "Habra",
+  "Hajipur",
+  "Haldwani-cum-Kathgodam",
+  "Hansi",
+  "Hapur",
+  "Hardoi ",
+  "Hardwar",
+  "Hazaribag",
+  "Hindupur",
+  "Hisar",
+  "Hoshiarpur",
+  "Hubli-Dharwad",
+  "Hugli-Chinsurah",
+  "Hyderabad",
+  "Ichalkaranji",
+  "Imphal",
+  "Indore",
+  "Itarsi",
+  "Jabalpur",
+  "Jagdalpur",
+  "Jaggaiahpet",
+  "Jagraon",
+  "Jagtial",
+  "Jaipur",
+  "Jalandhar Cantt.",
+  "Jalandhar",
+  "Jalpaiguri",
+  "Jamalpur",
+  "Jammalamadugu",
+  "Jammu",
+  "Jamnagar",
+  "Jamshedpur",
+  "Jamui",
+  "Jangaon",
+  "Jatani",
+  "Jehanabad",
+  "Jhansi",
+  "Jhargram",
+  "Jharsuguda",
+  "Jhumri Tilaiya",
+  "Jind",
+  "Jodhpur",
+  "Jorhat",
+  "Kadapa",
+  "Kadi",
+  "Kadiri",
+  "Kagaznagar",
+  "Kailasahar",
+  "Kaithal",
+  "Kakinada",
+  "Kalimpong",
+  "Kalpi",
+  "Kalyan-Dombivali",
+  "Kamareddy",
+  "Kancheepuram",
+  "Kandukur",
+  "Kanhangad",
+  "Kannur",
+  "Kanpur",
+  "Kapadvanj",
+  "Kapurthala",
+  "Karaikal",
+  "Karimganj",
+  "Karimnagar",
+  "Karjat",
+  "Karnal",
+  "Karur",
+  "Karwar",
+  "Kasaragod",
+  "Kashipur",
+  "KathUrban Agglomeration",
+  "Katihar",
+  "Kavali",
+  "Kayamkulam",
+  "Kendrapara",
+  "Kendujhar",
+  "Keshod",
+  "Khair",
+  "Khambhat",
+  "Khammam",
+  "Khanna",
+  "Kharagpur",
+  "Kharar",
+  "Khowai",
+  "Kishanganj",
+  "Kochi",
+  "Kodungallur",
+  "Kohima",
+  "Kolar",
+  "Kolkata",
+  "Kollam",
+  "Koratla",
+  "Korba",
+  "Kot Kapura",
+  "Kota",
+  "Kothagudem",
+  "Kottayam",
+  "Kovvur",
+  "Koyilandy",
+  "Kozhikode",
+  "Kunnamkulam",
+  "Kurnool",
+  "Kyathampalle",
+  "Lachhmangarh",
+  "Ladnu",
+  "Ladwa",
+  "Lahar",
+  "Laharpur",
+  "Lakheri",
+  "Lakhimpur",
+  "Lakhisarai",
+  "Lakshmeshwar",
+  "Lal Gopalganj Nindaura",
+  "Lalganj",
+  "Lalganj",
+  "Lalgudi",
+  "Lalitpur",
+  "Lalsot",
+  "Lanka",
+  "Lar",
+  "Lathi",
+  "Latur",
+  "Lilong",
+  "Limbdi",
+  "Lingsugur",
+  "Loha",
+  "Lohardaga",
+  "Lonar",
+  "Lonavla",
+  "Longowal",
+  "Loni",
+  "Losal",
+  "Lucknow",
+  "Ludhiana",
+  "Lumding",
+  "Lunawada",
+  "Lunglei",
+  "Macherla",
+  "Machilipatnam",
+  "Madanapalle",
+  "Maddur",
+  "Madhepura",
+  "Madhubani",
+  "Madhugiri",
+  "Madhupur",
+  "Madikeri",
+  "Madurai",
+  "Magadi",
+  "Mahad",
+  "Mahalingapura",
+  "Maharajganj",
+  "Maharajpur",
+  "Mahasamund",
+  "Mahbubnagar",
+  "Mahe",
+  "Mahemdabad",
+  "Mahendragarh",
+  "Mahesana",
+  "Mahidpur",
+  "Mahnar Bazar",
+  "Mahuva",
+  "Maihar",
+  "Mainaguri",
+  "Makhdumpur",
+  "Makrana",
+  "Malaj Khand",
+  "Malappuram",
+  "Malavalli",
+  "Malda",
+  "Malegaon",
+  "Malerkotla",
+  "Malkangiri",
+  "Malkapur",
+  "Malout",
+  "Malpura",
+  "Malur",
+  "Manachanallur",
+  "Manasa",
+  "Manavadar",
+  "Manawar",
+  "Mancherial",
+  "Mandalgarh",
+  "Mandamarri",
+  "Mandapeta",
+  "Mandawa",
+  "Mandi Dabwali",
+  "Mandi",
+  "Mandideep",
+  "Mandla",
+  "Mandsaur",
+  "Mandvi",
+  "Mandya",
+  "Manendragarh",
+  "Maner",
+  "Mangaldoi",
+  "Mangaluru",
+  "Mangalvedhe",
+  "Manglaur",
+  "Mangrol",
+  "Mangrol",
+  "Mangrulpir",
+  "Manihari",
+  "Manjlegaon",
+  "Mankachar",
+  "Manmad",
+  "Mansa",
+  "Mansa",
+  "Manuguru",
+  "Manvi",
+  "Manwath",
+  "Mapusa",
+  "Margao",
+  "Margherita",
+  "Marhaura",
+  "Mariani",
+  "Marigaon",
+  "Markapur",
+  "Marmagao",
+  "Masaurhi",
+  "Mathabhanga",
+  "Mathura",
+  "Mattannur",
+  "Mauganj",
+  "Mavelikkara",
+  "Mavoor",
+  "Mayang Imphal",
+  "Medak",
+  "Medininagar (Daltonganj)",
+  "Medinipur",
+  "Meerut",
+  "Mehkar",
+  "Memari",
+  "Merta City",
+  "Mhaswad",
+  "Mhow Cantonment",
+  "Mhowgaon",
+  "Mihijam",
+  "Mira-Bhayandar",
+  "Mirganj",
+  "Miryalaguda",
+  "Modasa",
+  "Modinagar",
+  "Moga",
+  "Mohali",
+  "Mokameh",
+  "Mokokchung",
+  "Monoharpur",
+  "Moradabad",
+  "Morena",
+  "Morinda, India",
+  "Morshi",
+  "Morvi",
+  "Motihari",
+  "Motipur",
+  "Mount Abu",
+  "Mudabidri",
+  "Mudalagi",
+  "Muddebihal",
+  "Mudhol",
+  "Mukerian",
+  "Mukhed",
+  "Muktsar",
+  "Mul",
+  "Mulbagal",
+  "Multai",
+  "Mumbai",
+  "Mundargi",
+  "Mundi",
+  "Mungeli",
+  "Munger",
+  "Murliganj",
+  "Murshidabad",
+  "Murtijapur",
+  "Murwara (Katni)",
+  "Musabani",
+  "Mussoorie",
+  "Muvattupuzha",
+  "Muzaffarpur",
+  "Mysore",
+  "Nabadwip",
+  "Nabarangapur",
+  "Nabha",
+  "Nadbai",
+  "Nadiad",
+  "Nagaon",
+  "Nagapattinam",
+  "Nagar",
+  "Nagari",
+  "Nagarkurnool",
+  "Nagaur",
+  "Nagda",
+  "Nagercoil",
+  "Nagina",
+  "Nagla",
+  "Nagpur",
+  "Nahan",
+  "Naharlagun",
+  "Naidupet",
+  "Naihati",
+  "Naila Janjgir",
+  "Nainital",
+  "Nainpur",
+  "Najibabad",
+  "Nakodar",
+  "Nakur",
+  "Nalbari",
+  "Namagiripettai",
+  "Namakkal",
+  "Nanded-Waghala",
+  "Nandgaon",
+  "Nandivaram-Guduvancheri",
+  "Nandura",
+  "Nandurbar",
+  "Nandyal",
+  "Nangal",
+  "Nanjangud",
+  "Nanjikottai",
+  "Nanpara",
+  "Narasapuram",
+  "Narasaraopet",
+  "Naraura",
+  "Narayanpet",
+  "Nargund",
+  "Narkatiaganj",
+  "Narkhed",
+  "Narnaul",
+  "Narsinghgarh",
+  "Narsinghgarh",
+  "Narsipatnam",
+  "Narwana",
+  "Nashik",
+  "Nasirabad",
+  "Natham",
+  "Nathdwara",
+  "Naugachhia",
+  "Naugawan Sadat",
+  "Nautanwa",
+  "Navalgund",
+  "Navsari",
+  "Nawabganj",
+  "Nawada",
+  "Nawanshahr",
+  "Nawapur",
+  "Nedumangad",
+  "Neem-Ka-Thana",
+  "Neemuch",
+  "Nehtaur",
+  "Nelamangala",
+  "Nellikuppam",
+  "Nellore",
+  "Nepanagar",
+  "New Delhi",
+  "Neyveli (TS)",
+  "Neyyattinkara",
+  "Nidadavole",
+  "Nilambur",
+  "Nilanga",
+  "Nimbahera",
+  "Nirmal",
+  "Niwai",
+  "Niwari",
+  "Nizamabad",
+  "Nohar",
+  "Noida",
+  "Nokha",
+  "Nokha",
+  "Nongstoin",
+  "Noorpur",
+  "North Lakhimpur",
+  "Nowgong",
+  "Nowrozabad (Khodargama)",
+  "Nuzvid",
+  "O' Valley",
+  "Obra",
+  "Oddanchatram",
+  "Ongole",
+  "Orai",
+  "Osmanabad",
+  "Ottappalam",
+  "Ozar",
+  "P.N.Patti",
+  "Pachora",
+  "Pachore",
+  "Pacode",
+  "Padmanabhapuram",
+  "Padra",
+  "Padrauna",
+  "Paithan",
+  "Pakaur",
+  "Palacole",
+  "Palai",
+  "Palakkad",
+  "Palampur",
+  "Palani",
+  "Palanpur",
+  "Palasa Kasibugga",
+  "Palghar",
+  "Pali",
+  "Pali",
+  "Palia Kalan",
+  "Palitana",
+  "Palladam",
+  "Pallapatti",
+  "Pallikonda",
+  "Palwal",
+  "Palwancha",
+  "Panagar",
+  "Panagudi",
+  "Panaji",
+  "Panamattom",
+  "Panchkula",
+  "Panchla",
+  "Pandharkaoda",
+  "Pandharpur",
+  "Pandhurna",
+  "PandUrban Agglomeration",
+  "Panipat",
+  "Panna",
+  "Panniyannur",
+  "Panruti",
+  "Panvel",
+  "Pappinisseri",
+  "Paradip",
+  "Paramakudi",
+  "Parangipettai",
+  "Parasi",
+  "Paravoor",
+  "Parbhani",
+  "Pardi",
+  "Parlakhemundi",
+  "Parli",
+  "Partur",
+  "Parvathipuram",
+  "Pasan",
+  "Paschim Punropara",
+  "Pasighat",
+  "Patan",
+  "Pathanamthitta",
+  "Pathankot",
+  "Pathardi",
+  "Pathri",
+  "Patiala",
+  "Patna",
+  "Patratu",
+  "Pattamundai",
+  "Patti",
+  "Pattran",
+  "Pattukkottai",
+  "Patur",
+  "Pauni",
+  "Pauri",
+  "Pavagada",
+  "Pedana",
+  "Peddapuram",
+  "Pehowa",
+  "Pen",
+  "Perambalur",
+  "Peravurani",
+  "Peringathur",
+  "Perinthalmanna",
+  "Periyakulam",
+  "Periyasemur",
+  "Pernampattu",
+  "Perumbavoor",
+  "Petlad",
+  "Phagwara",
+  "Phalodi",
+  "Phaltan",
+  "Phillaur",
+  "Phulabani",
+  "Phulera",
+  "Phulpur",
+  "Phusro",
+  "Pihani",
+  "Pilani",
+  "Pilibanga",
+  "Pilibhit",
+  "Pilkhuwa",
+  "Pindwara",
+  "Pinjore",
+  "Pipar City",
+  "Pipariya",
+  "Piriyapatna",
+  "Piro",
+  "Pithampur",
+  "Pithapuram",
+  "Pithoragarh",
+  "Pollachi",
+  "Polur",
+  "Pondicherry",
+  "Ponnani",
+  "Ponneri",
+  "Ponnur",
+  "Porbandar",
+  "Porsa",
+  "Port Blair",
+  "Powayan",
+  "Prantij",
+  "Pratapgarh",
+  "Pratapgarh",
+  "Prithvipur",
+  "Proddatur",
+  "Pudukkottai",
+  "Pudupattinam",
+  "Pukhrayan",
+  "Pulgaon",
+  "Puliyankudi",
+  "Punalur",
+  "Punch",
+  "Pune",
+  "Punganur",
+  "Punjaipugalur",
+  "Puranpur",
+  "Puri",
+  "Purna",
+  "Purnia",
+  "PurqUrban Agglomerationzi",
+  "Purulia",
+  "Purwa",
+  "Pusad",
+  "Puthuppally",
+  "Puttur",
+  "Puttur",
+  "Qadian",
+  "Raayachuru",
+  "Rabkavi Banhatti",
+  "Radhanpur",
+  "Rae Bareli",
+  "Rafiganj",
+  "Raghogarh-Vijaypur",
+  "Raghunathganj",
+  "Raghunathpur",
+  "Rahatgarh",
+  "Rahuri",
+  "Raiganj",
+  "Raigarh",
+  "Raikot",
+  "Raipur",
+  "Rairangpur",
+  "Raisen",
+  "Raisinghnagar",
+  "Rajagangapur",
+  "Rajahmundry",
+  "Rajakhera",
+  "Rajaldesar",
+  "Rajam",
+  "Rajampet",
+  "Rajapalayam",
+  "Rajauri",
+  "Rajgarh (Alwar)",
+  "Rajgarh (Churu)",
+  "Rajgarh",
+  "Rajgir",
+  "Rajkot",
+  "Rajnandgaon",
+  "Rajpipla",
+  "Rajpura",
+  "Rajsamand",
+  "Rajula",
+  "Rajura",
+  "Ramachandrapuram",
+  "Ramagundam",
+  "Ramanagaram",
+  "Ramanathapuram",
+  "Ramdurg",
+  "Rameshwaram",
+  "Ramganj Mandi",
+  "Ramgarh",
+  "Ramnagar",
+  "Ramnagar",
+  "Ramngarh",
+  "Rampur Maniharan",
+  "Rampur",
+  "Rampura Phul",
+  "Rampurhat",
+  "Ramtek",
+  "Ranaghat",
+  "Ranavav",
+  "Ranchi",
+  "Ranebennuru",
+  "Rangia",
+  "Rania",
+  "Ranibennur",
+  "Ranipet",
+  "Rapar",
+  "Rasipuram",
+  "Rasra",
+  "Ratangarh",
+  "Rath",
+  "Ratia",
+  "Ratlam",
+  "Ratnagiri",
+  "Rau",
+  "Raurkela",
+  "Raver",
+  "Rawatbhata",
+  "Rawatsar",
+  "Raxaul Bazar",
+  "Rayachoti",
+  "Rayadurg",
+  "Rayagada",
+  "Reengus",
+  "Rehli",
+  "Renigunta",
+  "Renukoot",
+  "Reoti",
+  "Repalle",
+  "Revelganj",
+  "Rewa",
+  "Rewari",
+  "Rishikesh",
+  "Risod",
+  "Robertsganj",
+  "Robertson Pet",
+  "Rohtak",
+  "Ron",
+  "Roorkee",
+  "Rosera",
+  "Rudauli",
+  "Rudrapur",
+  "Rudrapur",
+  "Rupnagar",
+  "Sabalgarh",
+  "Sadabad",
+  "Sadalagi",
+  "Sadasivpet",
+  "Sadri",
+  "Sadulpur",
+  "Sadulshahar",
+  "Safidon",
+  "Safipur",
+  "Sagar",
+  "Sagara",
+  "Sagwara",
+  "Saharanpur",
+  "Saharsa",
+  "Sahaspur",
+  "Sahaswan",
+  "Sahawar",
+  "Sahibganj",
+  "Sahjanwa",
+  "Saidpur",
+  "Saiha",
+  "Sailu",
+  "Sainthia",
+  "Sakaleshapura",
+  "Sakti",
+  "Salaya",
+  "Salem",
+  "Salur",
+  "Samalkha",
+  "Samalkot",
+  "Samana",
+  "Samastipur",
+  "Sambalpur",
+  "Sambhal",
+  "Sambhar",
+  "Samdhan",
+  "Samthar",
+  "Sanand",
+  "Sanawad",
+  "Sanchore",
+  "Sandi",
+  "Sandila",
+  "Sanduru",
+  "Sangamner",
+  "Sangareddy",
+  "Sangaria",
+  "Sangli",
+  "Sangole",
+  "Sangrur",
+  "Sankarankovil",
+  "Sankari",
+  "Sankeshwara",
+  "Santipur",
+  "Sarangpur",
+  "Sardarshahar",
+  "Sardhana",
+  "Sarni",
+  "Sarsod",
+  "Sasaram",
+  "Sasvad",
+  "Satana",
+  "Satara",
+  "Sathyamangalam",
+  "Satna",
+  "Sattenapalle",
+  "Sattur",
+  "Saunda",
+  "Saundatti-Yellamma",
+  "Sausar",
+  "Savanur",
+  "Savarkundla",
+  "Savner",
+  "Sawai Madhopur",
+  "Sawantwadi",
+  "Sedam",
+  "Sehore",
+  "Sendhwa",
+  "Seohara",
+  "Seoni",
+  "Seoni-Malwa",
+  "Shahabad",
+  "Shahabad, Hardoi",
+  "Shahabad, Rampur",
+  "Shahade",
+  "Shahbad",
+  "Shahdol",
+  "Shahganj",
+  "Shahjahanpur",
+  "Shahpur",
+  "Shahpura",
+  "Shahpura",
+  "Shajapur",
+  "Shamgarh",
+  "Shamli",
+  "Shamsabad, Agra",
+  "Shamsabad, Farrukhabad",
+  "Shegaon",
+  "Sheikhpura",
+  "Shendurjana",
+  "Shenkottai",
+  "Sheoganj",
+  "Sheohar",
+  "Sheopur",
+  "Sherghati",
+  "Sherkot",
+  "Shiggaon",
+  "Shikaripur",
+  "Shikarpur, Bulandshahr",
+  "Shikohabad",
+  "Shillong",
+  "Shimla",
+  "Shirdi",
+  "Shirpur-Warwade",
+  "Shirur",
+  "Shishgarh",
+  "Shivamogga",
+  "Shivpuri",
+  "Sholavandan",
+  "Sholingur",
+  "Shoranur",
+  "Shrigonda",
+  "Shrirampur",
+  "Shrirangapattana",
+  "Shujalpur",
+  "Siana",
+  "Sibsagar",
+  "Siddipet",
+  "Sidhi",
+  "Sidhpur",
+  "Sidlaghatta",
+  "Sihor",
+  "Sihora",
+  "Sikanderpur",
+  "Sikandra Rao",
+  "Sikandrabad",
+  "Sikar",
+  "Silao",
+  "Silapathar",
+  "Silchar",
+  "Siliguri",
+  "Sillod",
+  "Silvassa",
+  "Simdega",
+  "Sindagi",
+  "Sindhagi",
+  "Sindhnur",
+  "Singrauli",
+  "Sinnar",
+  "Sira",
+  "Sircilla",
+  "Sirhind Fatehgarh Sahib",
+  "Sirkali",
+  "Sirohi",
+  "Sironj",
+  "Sirsa",
+  "Sirsaganj",
+  "Sirsi",
+  "Sirsi",
+  "Siruguppa",
+  "Sitamarhi",
+  "Sitapur",
+  "Sitarganj",
+  "Sivaganga",
+  "Sivagiri",
+  "Sivakasi",
+  "Siwan",
+  "Sohagpur",
+  "Sohna",
+  "Sojat",
+  "Solan",
+  "Solapur",
+  "Sonamukhi",
+  "Sonepur",
+  "Songadh",
+  "Sonipat",
+  "Sopore",
+  "Soro",
+  "Soron",
+  "Soyagaon",
+  "Sri Madhopur",
+  "Srikakulam",
+  "Srikalahasti",
+  "Srinagar",
+  "Srinagar",
+  "Srinivaspur",
+  "Srirampore",
+  "Srisailam Project (Right Flank Colony) Township",
+  "Srivilliputhur",
+  "Sugauli",
+  "Sujangarh",
+  "Sujanpur",
+  "Sullurpeta",
+  "Sultanganj",
+  "Sultanpur",
+  "Sumerpur",
+  "Sumerpur",
+  "Sunabeda",
+  "Sunam",
+  "Sundargarh",
+  "Sundarnagar",
+  "Supaul",
+  "Surandai",
+  "Surapura",
+  "Surat",
+  "Suratgarh",
+  "SUrban Agglomerationr",
+  "Suri",
+  "Suriyampalayam",
+  "Suryapet",
+  "Tadepalligudem",
+  "Tadpatri",
+  "Takhatgarh",
+  "Taki",
+  "Talaja",
+  "Talcher",
+  "Talegaon Dabhade",
+  "Talikota",
+  "Taliparamba",
+  "Talode",
+  "Talwara",
+  "Tamluk",
+  "Tanda",
+  "Tandur",
+  "Tanuku",
+  "Tarakeswar",
+  "Tarana",
+  "Taranagar",
+  "Taraori",
+  "Tarbha",
+  "Tarikere",
+  "Tarn Taran",
+  "Tasgaon",
+  "Tehri",
+  "Tekkalakote",
+  "Tenali",
+  "Tenkasi",
+  "Tenu dam-cum-Kathhara",
+  "Terdal",
+  "Tezpur",
+  "Thakurdwara",
+  "Thammampatti",
+  "Thana Bhawan",
+  "Thane",
+  "Thanesar",
+  "Thangadh",
+  "Thanjavur",
+  "Tharad",
+  "Tharamangalam",
+  "Tharangambadi",
+  "Theni Allinagaram",
+  "Thirumangalam",
+  "Thirupuvanam",
+  "Thiruthuraipoondi",
+  "Thiruvalla",
+  "Thiruvallur",
+  "Thiruvananthapuram",
+  "Thiruvarur",
+  "Thodupuzha",
+  "Thoubal",
+  "Thrissur",
+  "Thuraiyur",
+  "Tikamgarh",
+  "Tilda Newra",
+  "Tilhar",
+  "Tindivanam",
+  "Tinsukia",
+  "Tiptur",
+  "Tirora",
+  "Tiruchendur",
+  "Tiruchengode",
+  "Tiruchirappalli",
+  "Tirukalukundram",
+  "Tirukkoyilur",
+  "Tirunelveli",
+  "Tirupathur",
+  "Tirupathur",
+  "Tirupati",
+  "Tiruppur",
+  "Tirur",
+  "Tiruttani",
+  "Tiruvannamalai",
+  "Tiruvethipuram",
+  "Tiruvuru",
+  "Tirwaganj",
+  "Titlagarh",
+  "Tittakudi",
+  "Todabhim",
+  "Todaraisingh",
+  "Tohana",
+  "Tonk",
+  "Tuensang",
+  "Tuljapur",
+  "Tulsipur",
+  "Tumkur",
+  "Tumsar",
+  "Tundla",
+  "Tuni",
+  "Tura",
+  "Uchgaon",
+  "Udaipur",
+  "Udaipur",
+  "Udaipurwati",
+  "Udgir",
+  "Udhagamandalam",
+  "Udhampur",
+  "Udumalaipettai",
+  "Udupi",
+  "Ujhani",
+  "Ujjain",
+  "Umarga",
+  "Umaria",
+  "Umarkhed",
+  "Umbergaon",
+  "Umred",
+  "Umreth",
+  "Una",
+  "Unjha",
+  "Unnamalaikadai",
+  "Unnao",
+  "Upleta",
+  "Uran Islampur",
+  "Uran",
+  "Uravakonda",
+  "Urmar Tanda",
+  "Usilampatti",
+  "Uthamapalayam",
+  "Uthiramerur",
+  "Utraula",
+  "Vadakkuvalliyur",
+  "Vadalur",
+  "Vadgaon Kasba",
+  "Vadipatti",
+  "Vadnagar",
+  "Vadodara",
+  "Vaijapur",
+  "Vaikom",
+  "Valparai",
+  "Valsad",
+  "Vandavasi",
+  "Vaniyambadi",
+  "Vapi",
+  "Vapi",
+  "Varanasi",
+  "Varkala",
+  "Vasai-Virar",
+  "Vatakara",
+  "Vedaranyam",
+  "Vellakoil",
+  "Vellore",
+  "Venkatagiri",
+  "Veraval",
+  "Vidisha",
+  "Vijainagar, Ajmer",
+  "Vijapur",
+  "Vijayapura",
+  "Vijayawada",
+  "Vijaypur",
+  "Vikarabad",
+  "Vikramasingapuram",
+  "Viluppuram",
+  "Vinukonda",
+  "Viramgam",
+  "Virudhachalam",
+  "Virudhunagar",
+  "Visakhapatnam",
+  "Visnagar",
+  "Viswanatham",
+  "Vita",
+  "Vizianagaram",
+  "Vrindavan",
+  "Vyara",
+  "Wadgaon Road",
+  "Wadhwan",
+  "Wadi",
+  "Wai",
+  "Wanaparthy",
+  "Wani",
+  "Wankaner",
+  "Wara Seoni",
+  "Warangal",
+  "Wardha",
+  "Warhapur",
+  "Warisaliganj",
+  "Warora",
+  "Warud",
+  "Washim",
+  "Wokha",
+  "Yadgir",
+  "Yamunanagar",
+  "Yanam",
+  "Yavatmal",
+  "Yawal",
+  "Yellandu",
+  "Yemmiganur",
+  "Yerraguntla",
+  "Yevla",
+  "Zaidpur",
+  "Zamania",
+  "Zira",
+  "Zirakpur",
+  "Zunheboto",
+      ],       
+
+         }
+  },
+  methods:
+  {
+      changePage(val) {
+          var val;
+         if(this.datas.campaigndes != ''  && this.datas.startdate != '' && this.datas.enddate != '')
+              {
+                       var val;
+                     
+                      this.page = val; 
+                   
+                   
+               }
+           else
+           {
+            
+              if(this.datas.campaigndes == null)
+                {
+              this.errorsecond.campaigndes = "Enter Campaign Description";
+                 }
+            
+                if(this.datas.startdate == null)
+               {
+                this.errorsecond.startdate = "Select Application Start Date";
+                }
+                   if(this.datas.enddate == null)
+               {
+                this.errorsecond.enddate = "Select Application End Date";
+                }
+
+         }
+
+         
+     
+    },
+     setcampaign(code) {
+            if (code) {
+                this.id = code.id;
+                this.companyname = code.companyname;
+      
+
+            } else {
+                this.id = null;
+                this.companyname = null;
+          
+            }
+        },
+            typepagechangep(val)
+        {   var val;
+            this.page = 0;
+            this.typepage = val; 
+        },
+            typepagechangepre(val)
+        {   
+          if(this.datas.campaigndes != ''  && this.datas.startdate != '' && this.datas.enddate != '' )
+           {   var val = 2;
+            this.typepage = val; 
+        }
+        },
+     typepagechange(val){  
+   
+               var val =0
+        
+          if(this.datas.campaigntitle != '' && this.datas.id != '' && this.brands.companyname != '')
+          {   var val = 1
+            
+          
+                 this.result1 = this.datas.campaignobj.split(","); 
+
+                
+                 
+                  //      if(this.datas.scategory != null){                    
+                  //  this.result2 = this.datas.scategory.split(","); 
+                  //          }
+
+                      if(this.datas.stype != null  ){
+                   this.result3 = this.datas.stype.split(",");  
+                    }
+                      if(this.datas.sage != null){
+                this.result4 = this.datas.sage.split(","); 
+                    }
+                  //     if(this.datas.sgender != null){
+                  //  this.result5 = this.datas.sgender.split(","); 
+                  //   }
+                     if(this.datas.slocation != null){
+                   this.result6 = this.datas.slocation.split(","); 
+                    }
+                   if(this.datas.salocation != null){
+                     this.result7 = this.datas.salocation.split(",");  
+                    }
+                        if(this.datas.saage != null){
+                    this.result8 = this.datas.saage.split(","); 
+                    }
+                    //     if(this.datas.sagender != null){
+                    //  this.result9 = this.datas.sagender.split(","); 
+                    // }
+                        if(this.datas.crange != null){
+                     this.crangeres = this.datas.crange.split(","); 
+                    }
+                      if(this.datas.orderedby == 'brand')
+                         {
+                           this.datas.pprice = null;
+                         }
+
+                      if(this.datas.cexpense != null)
+                     {
+                       
+                          this.errorlast.cexpense = "Enter Campaign title";
+                      }
+                     
+                this.typepage = val;
+          }
+               
+               else{
+
+                  console.log("error");
+             }
+       
+         
+    },
+
+    save(){
+                        document.getElementById("campaignform").submit();
+
+    },
+     
+       
+        savebutton2(){
+            var self = this;
+            this.errors = {
+                companyname:'',
+                id:'',
+                cexpense:'',
+                campaigntitle:'',
+                campaigndes:'',
+                campaignobj:'',
+                startdate:'',
+                enddate:'',
+                otherinfo:''
+            }
+              axios.post('/admin/campaign/validatecamp',{
+                  campaigntitle:this.datas.campaigntitle,
+                id:this.datas.id,
+                cexpense:this.datas.cexpense,
+                companyname:this.datas.companyname,
+                campaigndes:this.datas.campaigndes,
+                campaignobj:this.datas.campaignobj,
+                startdate:this.datas.startdate,
+                 enddate:this.datas.enddate,
+                otherinfo:this.datas.otherinfo,
+              })   
+              .then(response => {
+                  console.log(response);
+                        if(response.data.isvalid==true){
+                        document.getElementById("campaignform").submit();
+                        }
+                        else{
+
+                            self.errors=response.data.data;
+                            if(self.errors.campaigntitle && self.errors.id && self.errors.companyname)
+                            {
+                              self.typepage = 0;  
+                            }
+                            if(self.errors.campaigndes && self.errors.campaignobj && self.errors.startdate  && self.errors.enddate)
+                            {
+
+                              self.page = 0;
+                           
+                            }
+                             if(self.errors.cexpense)
+                            {
+                              self.typepage = 1;
+                           
+                            }
+                        }
+                        
+                    });
+        }
+
+  }
+}
+</script>

@@ -1,17 +1,17 @@
 <template>
-  <div class="container-fluid px-3 align-middle">
+  <div class="container-fluid px-2 align-middle">
  
 
-    <table class="table mt-4">
+    <table class="table mt-4 table-responsive">
       <thead>
         <tr class="text-center">
-           <th>
+           <th >
              Date of Joining
            </th>
            <th>
              UID
            </th>
-           <th>
+           <th >
              Name
            </th>
            <th>
@@ -31,6 +31,9 @@
            </th>
            <th>
             Verified
+           </th>
+            <th>
+             Instagram Followers
            </th>
            <th>
              Audience Location
@@ -76,6 +79,7 @@
                 No
               </span>
                 </td>
+                <td v-for="row in item.instagrams"> {{row.ifollowers}}</td>
             <td v-for="row in item.instagrams"> {{row.iaudienceloc}}</td>
               <td v-for="row in item.instagrams"> {{row.iaudienceage}}</td>
                   <td v-for="row in item.instagrams"> {{row.iaudiencegen}}</td>

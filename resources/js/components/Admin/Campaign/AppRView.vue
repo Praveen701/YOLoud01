@@ -1,7 +1,7 @@
 <template>
     <div>
 
-               <table  class="table mt-3 table-responsive-sm">
+               <table  class="table mt-3 table-responsive">
      <thead>
        <tr class="text-center">
               <th>UID</th>
@@ -110,11 +110,11 @@
       </span>
       
 
-      <span v-if="item.status != 5 && item.status > 0">
+      <span v-if="item.status != 6 && item.status > 0">
            <button class="btn-sm btn-success"  disabled>Shortlisted</button>
       </span>
       
-      <span v-if="item.status == 5">
+      <span v-if="item.status == 6">
            <button class="btn-sm btn-danger"  disabled>Declined</button>
       </span>
 
@@ -151,7 +151,7 @@
         <div class="modal-body">
             <div class="form-group">
               <div class="row">
-                <label for="contenttype" class="col-4 mt-2">Content Type</label>
+                <label for="contenttype" class="col-4 mt-2">Content Type <span style="color:red">*</span></label>
               
                            <multiselect class="col-6"  v-model="contenttype" :options="ctoptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Content Type" :preselect-first="false">
                 
@@ -167,7 +167,7 @@
                   <textarea  class="form-control col-11" placeholder="1000 characters allowed" v-model="otherdetails" id="otherdetails"></textarea>
               </div>
               <div class="form-group">
-                  <label for="commercial">Enter the commercial that the creator will recieve on suuccessful completion of the campaign </label>
+                  <label for="commercial">Enter the commercial that the creator will recieve on suuccessful completion of the campaign <span style="color:red">*</span></label>
                   <input  class="form-control col-11" placeholder="Enter Commercial" v-model="commercial" id="commercial">
               </div>
 
@@ -238,7 +238,7 @@
              
                 var self=this
                 self.status = 1;
-                if(this.status!=''){
+                if(this.contenttype != null && this.commercial != null && /^\d+$/.test(this.commercial)){
                    axios.post('/admin/campaign/shortlist/'+this.catid,{
                          status:this.status,
                          contenttype:this.contenttype,
@@ -255,11 +255,16 @@
                         }
                          window.location.reload();
                     });
-                    
+                      $('#addcat').modal('hide');
                 }
-           
-               
-                $('#addcat').modal('hide')
+                else{
+                         this.$swal({
+                title: "Error!",
+                icon: "error",
+              });
+                }
+                       
+                
             },
              changePage(val) {
 
@@ -269,6 +274,7 @@
              
               decline(item){
               
+              if(confirm("Do you really want to decline the creator?")){
                     axios.post('/admin/campaign/admindecline/'+item.id,{
                         
                         status:this.status
@@ -283,7 +289,7 @@
                          console.log("Error");
                         }
                     });
-                
+              }
            
             },
   

@@ -5,10 +5,10 @@
 
     <div class="card mt-5" style="max-width: 950px; margin: 0 auto;float: none;">
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="https://www.yoloud.com/wp-content/uploads/2020/06/3731924-768x768.jpg" alt="" width="400" height="400" />
+          <div class="col-md-5">
+            <img src="{{asset('img/3054281.jpg')}}" alt="" class="logimg" />
         </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="card-body ">
               <h2 class="card-title text-center">Sign In</h2>
               <form method="POST" action="{{ route('login') }}" class="mt-4">

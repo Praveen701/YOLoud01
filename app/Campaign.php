@@ -19,6 +19,8 @@ class Campaign extends Model
     public function brand(){
         return $this->hasOne('App\Brand','id','iid');
     }
+
+   
   
   
    

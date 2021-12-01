@@ -8,24 +8,29 @@
   
 
     <div class="row mt-2">
-      <div class="col-sm-3">
+      <div class="col-sm-2">
           <div class="">
               <h6 class="text-muted text-uppercase mt-0">Total Campaigns Created</h6>
               <h2 class="" data-plugin="counterup">   {{$data->count()}}</h2></div>
       </div>
       <!-- end col -->
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+        <div class="card-box tilebox-one">
+            <h6 class="text-muted text-uppercase mt-0">Draft Campaigns</h6>
+            <h2 class="" data-plugin="counterup">{{$draf->count()}}</h2></div>
+    </div>
+      <div class="col-sm-2">
           <div class="card-box tilebox-one">
               <h6 class="text-muted text-uppercase mt-0">Scheduled Campaigns</h6>
               <h2 class="" data-plugin="counterup">{{$shed->count()}}</h2></div>
       </div>
       <!-- end col -->
-      <div class="col-sm-3">
+      <div class="col-sm-2">
           <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
               <h6 class="text-muted text-uppercase mt-0">Ongoing Campaigns</h6>
               <h2 class="" data-plugin="counterup">{{$ongoing->count()}}</h2></div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Completed Campaigns</h6>
             <h2 class="" data-plugin="counterup">{{$completed->count()}}</h2></div>
@@ -126,7 +131,8 @@
           Phone Number     
         </th>
           
-            <th>Edit</th>
+      
+            <th>Mail</th>
             <th>Action</th>
           
             
@@ -157,6 +163,9 @@
          class="align-middle"
      
        >
+       @if ($row->campstatus == 0)
+           
+
 
        @if($row->startdate <= date('Y-m-d') && $row->enddate >= date('Y-m-d'))
        Ongoing
@@ -166,6 +175,12 @@
          Completed
          @else
          -
+         @endif
+
+         @else
+
+         Draft
+
          @endif
         
 
@@ -190,18 +205,30 @@
          {{$item->phonenumber}}
          </td>
          @endforeach
-           <td
-           class="align-middle"
-       
-         >
-        <a href="/admin/campaign/edit/{{$row->id}}" >Edit</a>
-         </td>
+          
          <td
          class="align-middle"
      
        >
       <a class="btn btn-warning btn-sm" href="/admin/campaign/sendmail/{{$row->id}}" >Trigger Mail</a>
        </td>
+       <td
+       class="align-middle"
+   
+     >
+     @if ($row->campstatus == 0)
+     <a class="btn btn-info btn-sm" href="/admin/campaign/edit/{{$row->id}}" >Edit</a>
+
+     @else
+     <a class="btn btn-info btn-sm" href="/admin/campaign/createone/{{$row->id}}" >Edit</a>
+         
+     @endif
+
+    
+
+    <a  href="/admin/campaign/delete/{{$row->id}}" onclick="return confirm('Do you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+
+     </td>
       
   
 

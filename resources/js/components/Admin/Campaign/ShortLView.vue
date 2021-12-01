@@ -1,7 +1,7 @@
 <template>
   <div>
 
-               <table  class="table mt-3 table-responsive-sm">
+               <table  class="table mt-3 table-responsive">
      <thead>
        <tr class="text-center">
               <th>UID</th>
@@ -95,24 +95,22 @@
        </td>
      
            <td class="align-middle">
-                <span v-if="item.status == 3">
+                <span v-if="item.status == 3 || item.status > 6">
                     <p>Accepted</p>
                </span>
                 <span v-if="item.status == 4">
                     <p>Declined</p>
                </span>
-                <span v-if="item.status == 1">
+                <span v-if="item.status == 1 || item.status == 5">
                     <p>Pending</p>
                </span>
-                 <span v-if="item.status > 5 || item.status == 2">
-                    <p>Finalized</p>
-               </span>
-                 <span v-if="item.status == 5">
+                
+                 <span v-if="item.status == 6">
                     <p>-</p>
                </span>
            </td>
            <td class="align-middle">
-              <span v-if="item.status == 1">
+              <span v-if="item.status == 1 || item.status == 5">
            <button class="btn-sm btn-dark" disabled>Finalize</button>
 
           <button class="btn-sm btn-dark" disabled>Reject</button>
@@ -129,10 +127,10 @@
           <button class="btn-sm btn-primary" v-on:click="openeditmodal(item,ind)">Send Revised Offer</button>
 
       </span>
-      <span v-if="item.status == 2 || item.status > 5">
+      <span v-if="item.status > 6">
            <button class="btn-sm btn-success" disabled>Finalized</button>
       </span>
-          <span v-if="item.status == 5">
+          <span v-if="item.status == 6">
            <button class="btn-sm btn-danger" disabled>Rejected</button>
       </span>
 
@@ -169,7 +167,7 @@
         <div class="modal-body">
             <div class="form-group">
               <div class="row">
-                <label for="contenttype" class="col-4 mt-2">Content Type</label>
+                <label for="contenttype" class="col-4 mt-2">Content Type <span style="color:red">*</span></label>
                    <multiselect class="col-6"  v-model="conty" :options="ctoptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Content Type" :preselect-first="false">
                 
                         </multiselect>
@@ -182,7 +180,7 @@
                   <textarea  class="form-control col-11" placeholder="1000 characters allowed" v-model="otherdetails" id="otherdetails"></textarea>
               </div>
               <div class="form-group">
-                  <label for="commercial">Enter the commercial that the creator will recieve on suuccessful completion of the campaign </label>
+                  <label for="commercial">Enter the commercial that the creator will recieve on suuccessful completion of the campaign <span style="color:red">*</span> </label>
                   <input  class="form-control col-11" placeholder="Enter Commercial" v-model="commercial" id="commercial">
               </div>
 
@@ -241,8 +239,10 @@
      
              },
               finalize(item){
+                      if(confirm("Do you really want to change status?")){
+                
                 var self=this
-                self.status = 2;
+                self.status = 7;
                 if(this.status!=''){
                     axios.post('/admin/campaign/finalstatus/'+item.id,{
                         
@@ -259,10 +259,12 @@
                         }
                     });
                 }
-           
+                      }
             },
               reject(item){
-  
+                
+                      if(confirm("Do you really want to change status?")){
+                
                     axios.post('/admin/campaign/adminreject/'+item.id,{
                         
                         status:this.status
@@ -278,7 +280,7 @@
                         }
                     });
                 
-           
+                      }
             },
              openeditmodal(item,ind){
               
@@ -296,9 +298,9 @@
               addcatname(){
              
                 var self=this
-                self.status = 1;
+                self.status = 5;
              
-                if(this.status!=''){
+                if(this.conty !='' && this.commercial != '' && /^\d+$/.test(this.commercial)){
                    
                
                    axios.post('/admin/campaign/revisedoffer/'+this.catid,{
@@ -317,10 +319,16 @@
                         }
                          window.location.reload();
                     });
-                    
+                    $('#addcat').modal('hide');
+                }
+                else{
+                           this.$swal({
+                title: "Error!",
+                icon: "error",
+              });
                 }
                
-                $('#addcat').modal('hide')
+                
             },
   
 

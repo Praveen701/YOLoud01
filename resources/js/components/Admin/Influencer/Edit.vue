@@ -119,7 +119,7 @@
         <input
           type="hidden"
           name="iaudienceloc"
-          v-model="audcity"
+          v-model="audloc"
           id=""
         />
         <input
@@ -414,7 +414,7 @@
                               </div>
                               <div class="row">
                                 <div class="col-6">
-                                  <h6 class="mb-3">Location</h6>
+                                  <h6 class="mb-3">Top 3 Audience Location</h6>
                                 </div>
                                 <div class="col-6 text-secondary">
                                   {{ instagram.iaudienceloc }}
@@ -729,17 +729,17 @@
                  
                    <div class="col-sm-12 mt-2 col-md-6">
                   <div class="form-group">
-                         <label for="audienceage">Top 3 Audience Age Group</label>
-                      <multiselect  v-model="audage" :options="aaoptions" :max=3 :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location" :preselect-first="false">
+                         <label for="iaudienceage">Top 3 Audience Age Group</label>
+                      <multiselect  v-model="audage" id="iaudiencegen"  :options="aaoptions" :max=3 :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Age Group" :preselect-first="false">
                 
                         </multiselect>
                   </div>
                 </div>
                   <div class="col-sm-12 mt-2 col-md-6">
                   <div class="form-group">
-                         <label for="audienceage">Top 3 Audience Location</label>
+                         <label for="iaudienceloc">Top 3 Audience Location</label>
                          
-                        <multiselect  v-model="audcity" :options="ccoptions" :max=3 :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location" :preselect-first="false">
+                        <multiselect  v-model="audloc" id="iaudienceloc" :options="ccoptions" :max=3 :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Creator Location" :preselect-first="false">
               
                       </multiselect>
 
@@ -1635,7 +1635,7 @@ export default {
        ? this.instagram.iaudienceage.split(",")
         : []
        ,
-       audcity:this.instagram.iaudienceloc
+        audloc:this.instagram.iaudienceloc
        ? this.instagram.iaudienceloc.split(",")
         : []
        ,
@@ -2951,7 +2951,7 @@ export default {
               this.email = response.data.email;
               this.gender = response.data.gender;
                this.pincode = response.data.pincode;
-              this.dcity = response.data.cdity;
+              this.dcity = response.data.dcity;
               this.state = response.data.state;
               this.country = response.data.country;
               this.emailstatus = response.data.emailstatus;

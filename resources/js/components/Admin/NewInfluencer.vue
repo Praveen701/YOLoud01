@@ -207,6 +207,16 @@
                                     <label for="dob" class="form-label"
                                         >Date of Birth <span style="color:red">*</span></label
                                     >
+                                    <!-- <Datepicker
+                                 
+                                       :bootstrap-styling="true"
+                                        
+                                        id="dob"
+                                        @input="calcage"
+                                        v-model="dob"
+                                                                     
+                                        format="yyyy-MM-dd"></Datepicker> -->
+
                                     <input
                                         type="date"
                                         class="form-control"
@@ -572,7 +582,8 @@
                                 Choose Your Intrested Areas(Select max.3)
                             </h5>
                             <div class="row mt-2">
-                                <button type="button" v-on:click="intrestcheck(item.name)" :class="[userintrests.includes(item.name)? 'col-sm-12 p-2 m-1 mt-2 col-md-2 btn btn-primary' : 'col-sm-12 mt-2 m-1 p-2 col-md-2 btn btn-outline-primary' ]"  v-for="item,index in intrest">
+                                <button type="button" v-on:click="intrestcheck(item.name)"
+                                 :class="[userintrests.includes(item.name)? 'col-sm-12 p-2 m-1 mt-2 col-md-2 btn btn-primary' : 'col-sm-12 mt-2 m-1 p-2 col-md-2 btn btn-outline-primary' ]"  v-for="item,index in intrest">
                                         {{ item.name }}
                                 </button>
                             </div>
@@ -824,7 +835,11 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
 export default {
+    components: {
+    Datepicker
+  },
     props: ['intrest','instagram','language','yftsocial'],
     data() {
         return {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CampaignInflList;
 use App\Campaign;
 use App\Influencer;
+use App\User;
 use Auth;
 use App\Mail\ApplicationFinalized;
 use App\Mail\ApplicationShortlisted;
@@ -33,7 +34,7 @@ class CaignInfuListController extends Controller
         $data=CampaignInflList::find($id);
         $user=User::where('id',$data->iid)->first();
         $campaign=Campaign::where('id',$data->cid)->first();
-        $data->status= 5;
+        $data->status= 6;
         $data->save();
         Mail::to($user->email)->send(new ApplicationDeclined($data,$campaign));
         return 1;
@@ -55,7 +56,7 @@ class CaignInfuListController extends Controller
         $data=CampaignInflList::find($id);
         $user=User::where('id',$data->iid)->first();
         $campaign=Campaign::where('id',$data->cid)->first();
-        $data->status= 5;
+        $data->status= 6;
         $data->save();
         Mail::to($user->email)->send(new ApplicationRejected($data,$campaign));
         return 1;

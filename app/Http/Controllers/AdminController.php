@@ -7,6 +7,7 @@ use App\Intrest;
 use Validator;
 use App\Brand;
 use Str;
+use DB;
 use File;
 use Storage;
 use App\Influencer;
@@ -19,6 +20,7 @@ use App\Campaign;
 use App\CampaignInflList;
 use Auth;
 use App\Imports\InfluencersImport;
+use App\Mail\AccountCreatedSuccessfully;
 use App\Imports\BrandImport;
 use App\Exports\InfluencerExport;
 use Illuminate\Support\Facades\Mail;
@@ -159,7 +161,7 @@ class AdminController extends Controller
         $yftsocial=YFTSocials::where('iid',$id)->first();
         $inflog=InfluencerLog::where('iid',$id)->get();
         $sociallog=SocialLog::where('iid',$id)->get();
-        $camppar=CampaignInflList::where('iid',$id)->with('mcampaign')->get();
+        $camppar=CampaignInflList::where('iid',$id)->with('mcampaign')->where('status','!=',2)->get();
 
         // return $user;
         return view('Admin/Influencer/edit',['data'=>$user,'influencer'=>$influencer,'insta'=>$insta,'intrest'=>$intrest,
@@ -259,7 +261,8 @@ class AdminController extends Controller
      
          if($insta->ifollowers != 0)
          {
-       $insta->iengagementrate= ( round( (($insta->iavglike +  $insta->iavgcmt ) / $insta->ifollowers),2 ) *100 );
+     
+           $insta->iengagementrate= ( round( (($insta->iavglike +  $insta->iavgcmt ) / $insta->ifollowers),2 ) *100 );
 
          }
          else {
@@ -283,7 +286,7 @@ class AdminController extends Controller
         $influencer->save();
         $insta->save();
 
-        // Mail::to($request->email)->send(new NewInfluencer($user));
+        Mail::to($request->email)->send(new NewInfluencer($user));
 
         $request->session()->flash('status', 'Added Succesfully');
         return redirect('/admin/influencer');
@@ -293,7 +296,7 @@ class AdminController extends Controller
     
     public function UpdateInfluencer(Request $request,$id)
     {
-        // return $request;
+        //  return $request;
         $user= User::find($id);
 
        
@@ -658,7 +661,7 @@ class AdminController extends Controller
         //         $insta->iaudienceloc=  $request->iaudienceloc;
               
         //     }
-
+        $insta->iaudienceloc=  $request->iaudienceloc;
             if($insta->iaudagestatus == 2)   //aage
             {
                     if($insta->iaudienceage == $request->iaudienceage)
@@ -731,14 +734,14 @@ class AdminController extends Controller
                     $influencer->inftype='Mega';
                 }
 
-                if($insta->ifollowers != 0)
-                {
-              $insta->iengagementrate= ( round( (($insta->iavglike +  $insta->iavgcmt ) / $insta->ifollowers),2 ) *100 );
+            //     if($insta->ifollowers != 0)
+            //     {
+            //   $insta->iengagementrate= ( round( (($insta->iavglike +  $insta->iavgcmt ) / $insta->ifollowers),2 ) *100 );
 
-                }
-                else {
-                    $insta->iengagementrate= 0;
-                }
+            //     }
+            //     else {
+            //         $insta->iengagementrate= 0;
+            //     }
 
               
                
@@ -923,14 +926,23 @@ class AdminController extends Controller
 
         // return $csv;
     
-                $user= new User;
-                $user->id=$csv[0];
-                $user->name=$csv[1];
-                $user->email=$csv[2];
-                $user->password=Hash::make("YOLOUD001");
-                $user->type=0;
-                $user->accountstatus=0;
-                $user->profilestatus=0;
+                // $user= new User;
+                // $user->id=$csv[0];
+                // $user->name=$csv[1];
+                // $user->email=$csv[2];
+                // $user->password=Hash::make("YOLOUD001");
+                // $user->type=0;
+                // $user->accountstatus=0;
+                // $user->profilestatus=0;
+                $user=User::create([
+                    'name' => $csv[0],
+                    'email' => $csv[1],
+                    'password' => Hash::make('YOLOUD001'),
+                    'type'=>0,
+                    'accountstatus'=>0,
+                    'profilestatus'=>0
+                ]);
+
 
                 $inf=new Influencer;
                 $x=[];
@@ -950,25 +962,26 @@ class AdminController extends Controller
                 $p['value']=json_encode($z);
                 $inf->payment=json_encode($x);
                 $inf->occupation=json_encode($p);
-                $inf->iid = $csv[0];
-                $inf->phone = $csv[3];
-                $inf->dob = date('Y-m-d',strtotime($csv[4]));
-                $inf->gender = $csv[5];
-                $inf->city = $csv[6];
-                $inf->state = $csv[7];
-                $inf->pincode = $csv[8];
+                $inf->iid = $user->id;
+                $inf->phone = $csv[2];
+                $inf->dob = date('Y-m-d',strtotime($csv[3]));
+                $inf->gender = $csv[4];
+                $inf->city = $csv[5];
+                // $inf->state = $csv[6];
+                // $inf->pincode = $csv[7];
 
                 $insta=new InstagramSocial;
-                $insta->iid = $csv[0];
+                $insta->iid = $user->id;
 
                 $yft=new YFTSocials;
-                $yft->iid = $csv[0];
+                $yft->iid = $user->id;
               
-                 
+                
                 $yft->save();
                 $insta->save();
                 $user->save();
                 $inf->save();
+                // Mail::to($user->email)->send(new AccountCreatedSuccessfully($user));
        
     }
  //return $request;
@@ -1155,6 +1168,11 @@ class AdminController extends Controller
 
     }
 
+    public function yol()
+    {
+        $yol = DB::select('select * from ins_logs');
+        return $yol;
+    }
 
 
 

@@ -190,11 +190,17 @@ Route::middleware(['admin', 'web','auth'])->prefix('admin')->group(function () {
     Route::prefix('campaign')->group(function () {
         Route::get('/','CampaignController@index');
         Route::get('/create','CampaignController@createcampaign');
+        Route::get('/createone/{id}','CampaignController@createcampaign0');
         
-        Route::post('/create','CampaignController@storecampaign');
+        Route::post('/create','CampaignController@storecampaign0');
+
+        Route::post('/createone/{id}','CampaignController@storecampaign');
+
         Route::get('/edit/{id}','CampaignController@editcampaign');
         Route::post('/edit/{id}','CampaignController@updatecampaign');
         Route::get('/view/{id}','CampaignController@viewcamp');
+        Route::get('/delete/{id}','CampaignController@delcamp');
+
         Route::post('/validatecamp','CampaignController@validatecamp');
         Route::get('/view/{id}/exportinsights','CampaignController@exportinsights');
         Route::get('/newcreator/{id}','CampaignController@newcreator');
@@ -217,6 +223,9 @@ Route::middleware(['admin', 'web','auth'])->prefix('admin')->group(function () {
         Route::post('/finalstatus/{id}','CaignInfuListController@finalstatus');
         Route::post('/proorder/{id}','CaignInfuListController@proorder');
         // Route::post('/edit/{id}','AdminController@updateBrand');
+        Route::post('/view/savecm/{id}','CampaignController@savecm');
+
+
     });
     Route::prefix('settings')->group(function () {
         Route::prefix('interest')->group(function () {
@@ -232,6 +241,16 @@ Route::middleware(['admin', 'web','auth'])->prefix('admin')->group(function () {
             Route::post('/edit/{id}','LanguageController@update');
             Route::post('/delete','LanguageController@destroy');
         });
+        
+    });
+    Route::prefix('yol-products')->group(function () {
+        Route::prefix('yolytics')->group(function () {
+            Route::get('/','AdminController@yol');
+            
+      
+        });
+
+        
     });
 });
 
@@ -240,9 +259,43 @@ Route::middleware(['web','auth'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::post('/changeavatars','SettingsController@changeavatar');
         Route::post('/uploadins','SettingsController@uploadins');
+        Route::post('/iconnect','SettingsController@iconnect');
+        Route::post('/idelete','SettingsController@idelete');
         Route::get('/','SettingsController@index');
         Route::post('/','SettingsController@store');
     });
+    Route::prefix('socialaccounts')->group(function () {
+    
+        Route::get('/','SaccountController@index');
+        Route::post('/','SaccountController@store');
+        Route::post('/edituname','SaccountController@edituname');
+        Route::post('/edityt','SaccountController@edityt');
+        Route::post('/editfb','SaccountController@editfb');
+        Route::post('/pcost','SaccountController@pcost');
+        Route::post('/editpcost','SaccountController@editpcost');
+
+        Route::get('/imgdel','SaccountController@imgdel');
+
+        Route::post('/instaconnect','SaccountController@instaconnect');
+        Route::post('/fbname','SaccountController@fbname');
+        Route::post('/ytname','SaccountController@ytname');
+
+    });
+    Route::prefix('payment')->group(function () {
+        Route::get('/','SettingsController@payment');
+        Route::post('/','SettingsController@paymentstore');
+        
+
+
+    });
+    Route::prefix('otheroffers')->group(function () {
+        Route::get('/','OtherOppController@ooffer');
+        // Route::post('/','OtherOppController@paymentstore');
+        
+
+
+    });
+
     Route::prefix('campaign')->group(function () {
         Route::get('/','CampaignController@userindex');
         Route::get('/status/{id}','CampaignController@cstatus');
@@ -256,6 +309,7 @@ Route::middleware(['web','auth'])->group(function () {
         Route::post('/porder/{id}','CampaignController@porder');
         Route::post('/preceive/{id}','CampaignController@preceive');
         Route::get('/{cid}/campaccept/{iid}/brandid/{bid}','CampaignController@campaccept');
+        Route::get('/{cid}/campnotsuit/{iid}/brandid/{bid}','CampaignController@campnotsuit');
         // Route::post('/paginatecamp','CampaignController@paginatecamp');
     });
     Route::prefix('brand')->group(function () {

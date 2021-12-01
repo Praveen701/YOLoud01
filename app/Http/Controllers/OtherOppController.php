@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\OtherOpp;
 use Validator;
+use Str;
 
 class OtherOppController extends Controller
 {
@@ -52,7 +53,8 @@ class OtherOppController extends Controller
        $opp->otitle=$request->otitle;
        $opp->odes=$request->odes;
        $opp->ocontactus=$request->ocontactus;
-       $opp->oppstatus=0;
+       $opp->oppstatus=1;
+       $opp->orandom=Str::random(6);
        $opp->save();
       
        $request->session()->flash('status', 'Opportunity Created Succesfully');
@@ -95,7 +97,7 @@ class OtherOppController extends Controller
             $opp->otitle=$request->otitle;
             $opp->odes=$request->odes;
             $opp->ocontactus=$request->ocontactus;
-            $opp->oppstatus=0;
+            $opp->oppstatus=1;
             $opp->save();
 
          
@@ -129,6 +131,21 @@ class OtherOppController extends Controller
         $data->oppstatus= 0;
         $data->save();
         return 1;
+    }
+
+
+
+    // USER's PAGE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    public function ooffer()
+    {
+        
+       
+
+        $act = OtherOpp::where('oppstatus','=',1)->get();
+       
+        return view('Influencer/ooffer',['act'=>$act]);
+
     }
 
 }

@@ -31,6 +31,15 @@ class CreateInstagramSocialsTable extends Migration
             $table->string('iaudiencegen')->nullable();
             $table->longText('updateinsphoto')->nullable();
 
+            // $table->longText('istory')->nullable();
+            // $table->longText('ispost')->nullable();
+            // $table->longText('ireel')->nullable();
+            // $table->longText('ivedio')->nullable();
+            // $table->longText('iigtv')->nullable();
+            // $table->integer('iconnect')->default(0);
+
+           
+
             $table->integer('iusernamesstatus')->default(0);//00 pending 1 active 2 rejected
             $table->integer('ifollowersstatus')->default(0);//00 pending 1 active 2 rejected
             $table->integer('ipostsstatus')->default(0);//00 pending 1 active 2 rejected

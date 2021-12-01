@@ -3,20 +3,90 @@
 @section('content')
 
 
-<div class="container">
-                <h3 class="mt-2"> Good <span style="font-weight:900;font-size:28px">
-                    @if(date('H')>=0 && date('H')<12) Morning
-                        @elseif(date('H')>=12 && date('H')<15) Afternoon
-                        @else Evening
-                  @endif
-                        </span>, {{Auth::user()->name}} !
-            </h3>
+
+<div class="container" style="margin-top: 4rem;margin-bottom: 3rem">
+
+    
+              
       
-            <hr>
-            <div class="card">
+             
+            <div class="card" style="border-radius: 20px;">
                 <div class="card-body">
-                  <h2 class="card-title">Pending Actions</h2>
-                  <div class="row justify-content-start mt-3">
+                    <h3 class="mt-2"> Good <span style="font-weight:900;font-size:28px">
+                        @if(date('H')>=0 && date('H')<12) Morning
+                            @elseif(date('H')>=12 && date('H')<15) Afternoon
+                            @else Evening
+                      @endif
+                            </span>, {{Auth::user()->name}} 
+                </h3>
+                <h4><b style="color: grey">Account : </b> 
+                    @if(Auth::user()->profilestatus == 1)
+                    <b style="color: green">Approved</b>
+                    @else
+                    <b style="color: red">Not Approved</b>
+                    @endif
+                </h4>
+
+                
+                <div class="row mt-3 ">
+
+                    <div class="col-md-3  col-sm-6 col-6">
+                       
+
+                        <a href="/campaign">
+                            <span class="badge text-wrap pop popsm" style="background-color: #6aa3f9;color:white;font-size:1.1rem;
+   
+                            border-radius: 18px;">
+                               
+                                {{count($campaign)}}</span>
+                         
+                            <div class="card text-center" style="border-radius: 20px;background-color: #ebe8e8">
+
+                             
+                        
+                                <div class="card-body">
+                                    
+                                   
+                                  <h4 class="card-title" style="color: #7e7979"><i class="fas fa-bullhorn" style="font-size: 20px"></i></h4>
+                                
+                                  <h6 class="card-text cdes" style="color: #7e7979;font-size:0.80rem">New Campaign Opportunity</h6>
+                                </div>
+                              </div>
+                           
+                        </a>
+                      
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+
+                        <a href="/otheroffers">
+                            <span class="badge text-wrap not pop popsm2" style="background-color: #6aa3f9;color:white;
+                        
+                           
+                            border-radius: 18px;
+                            
+                            font-size:1.1rem;
+                           ">
+                                {{count($otheropp)}}</span>
+                            <div class="card text-center oopp" style="border-radius: 20px;background-color: #ebe8e8">
+                        
+                                <div class="card-body">
+                                  <h4 class="card-title" style="color: #7e7979"><i class="fas fa-tag" style="font-size: 20px"></i></h4>
+                                  <h6 class="card-text cdes" style="color: #7e7979;font-size:0.80rem">Other Opportunities</h6>
+                                </div>
+                              </div>
+
+                        </a>
+                       
+                        
+                    </div>
+
+                </div>
+
+
+
+
+                  {{-- <div class="row justify-content-start mt-3">
                     @if (Auth::user()->name == '' || Auth::user()->email == '' || Auth::user()->name == '' || Auth::user()->influencer->phone == ''
                     || Auth::user()->influencer->gender == '' || Auth::user()->influencer->state == '' || Auth::user()->influencer->city == ''
                      || Auth::user()->influencer->pincode == '' || Auth::user()->influencer->country == '' || Auth::user()->influencer->intrest == ''
@@ -37,22 +107,24 @@
                @endif
                    
              
-                    </div>  
+                    </div>   --}}
+
+
                 </div>
               </div>
-              <hr>
+              
 
- 
-              <div class="card">
+              <h2 class="card-title mt-3">My Performance</h2>
+              <div class="card" style="border-radius: 20px">
                 <div class="card-body">
-                  <h2 class="card-title">My Performance</h2>
-    
-   
+              
 
-    @if (count($myper) > 0)
-    <div class="row justify-content-center" >
+    
+
+
+     <div class="row justify-content-center" >
       
-        <div class="col-md-3  col-sm-12 mt-2" >
+        {{-- <div class="col-md-3  col-sm-12 mt-2" >
             <div class="card border border-primary" style="border-radius: 20px">
                 <div class="card-body">
                     <div class="row">
@@ -60,15 +132,13 @@
                             <h3 style="color:#fb743e" class="">{{count($brandww)}}</h3>
                             <h5>Brands Worked With</h5>
                         </div>
-                        {{-- <div class="col-4">
-                            <h1 style="color:#1a508b"><i class="fas fa-cubes    "></i></h1>
-                        </div> --}}
+                      
                     </div>
 
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-12 mt-2" >
+        </div> --}}
+        {{-- <div class="col-md-3 col-sm-12 mt-2" >
             <div class="card border border-primary" style="border-radius: 20px">
                 <div class="card-body">
                     <div class="row">
@@ -76,59 +146,62 @@
                             <h3 style="color:#fb743e" class=""> {{round($campper,2)}} %</h3>
                             <h5>Campaign Performance</h5>
                         </div>
-                        {{-- <div class="col-4">
+                        <div class="col-4">
                             <h1 style="color:#1a508b"><i class="fas fa-box-open    "></i></h1>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
        
       
-        <div class="col-md-3  col-sm-12 mt-2">
-            <div class="card border border-primary" style="border-radius: 20px">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3 style="color:#fb743e" class=""><i class="fas fa-rupee-sign"></i> {{$earn}}</h3>
-                            <h5>My Earnings</h5>
-                        </div>
-                        {{-- <div class="col-4">
-                            <h1 style="color:#1a508b"><i class="fas fa-rupee-sign    "></i></h1>
-                        </div> --}}
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
       
-        <div class="col-md-3 col-sm-12 mt-2" >
-            <div class="card border border-primary" style="border-radius: 20px">
+        <div class="col-md-6 col-6 mt-2" >
+            <div class="card border " style="border-radius: 20px;background-color: #bedfdf">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8">
-                            @if ($rating == null)
-                            <h3 style="color:#fb743e" class="">
-                               0 / 5</h3>
-                            @else
-                            <h3 style="color:#fb743e" class="">
-                                {{$rating}} / 5</h3>
-                            @endif
+                           <h3 style="color: black" class="instaii">{{count($cpar)}}</h3>
                           
-                            <h5>Average Rating</h5>
+                            <h4 class="myp">Campaigns
+                                Participated</h4>
                         </div>
-                        {{-- <div class="col-4">
-                            <h1 style="color:#1a508b"><i class="fas fa-star"></i></h1>
-                        </div> --}}
+                        <div class="col-4">
+                            <h1 style="color:black"><i class="fas fa-clipboard-check instai" ></i></h1>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        
+        <div class="col-md-6  col-6 mt-2">
+            <div class="card border" style="border-radius: 20px;background-color: #b6f1e3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 style="color:black" class="instaii"><i class="fas fa-rupee-sign"></i> {{$earn}}</h3>
+                            <h4 class="myp">Commercials Received</h4>
+                        </div>
+                        <div class="col-4">
+                        
+                            <h1 style="color:black"><i class="fa fa-wallet instai" ></i></h1>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
 
     
     </div>
-    @else
+
+
+    {{-- @else
 
 
             <div class="justify-content-center mt-3">
@@ -140,13 +213,206 @@
             </div>
 
     
-    @endif
+    @endif --}}
 </div>
 </div>
+
+
+     <h2 class="mt-3">Social Accounts</h2>
 
     
 
-    <hr>
+      <div class="row">
+
+          <div class="col-md-6">
+              
+                <div class="card mb-3" style="border-radius: 20px;">
+                 
+                  <div class="row">
+                  <div class="col-6">
+                    <i class="fab fa-instagram  ml-4 mt-2" style="font-size: 4rem;" ></i>
+                  </div>
+                  <div class="col-6">
+                    @if (Auth::user()->instagram->iusername != null)
+                   <h6 class="ml-4 mt-4 shead"><b>@ {{Auth::user()->instagram->iusername}}</b></h6>
+                   
+                   @else
+                   <h6 class="ml-4 mt-4" style="color: black"><b>-</b></h6>
+                   @endif
+                  </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Followers</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->ifollowers}}</b></h6>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Posts</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->iposts}}</b></h6>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Average Likes</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->iavglike}}</b></h6>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Average Comments</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->iavgcmt}}</b></h6>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Engagement Rate</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->iengagementrate}}%</b></h6>
+                    </div>
+                  </div>
+
+                  @if (Auth::user()->instagram->iusername != null)
+                  <div class="row">
+                    <div class="col-6">
+                    <h6 style="color: grey" class="ml-4 mt-4">Last Update On</h6>
+                    </div>
+                    <div class="col-6">
+
+
+                        
+                     <h6 class="ml-4 mt-4" style="color: grey" ><b>{{Auth::user()->instagram->updated_at}}</b></h6>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  @endif
+
+              
+
+                  <div class="container ml-2 mt-3 mb-3">
+
+                    <p style="color: grey">(Please note: Update your instagram account stats every week so 
+                        that you never miss out on any opportunity matching your profile)</p>
+                    
+                        <div class="row">
+                            <div class="col-md-12 col-12">
+                                <h6 style="color: #6aa3d8"><a href="/socialaccounts" class=""><b>Update your Instagaram Stats</b></a></h6> 
+
+                            </div>
+                        </div>
+
+                  </div>
+
+        
+
+
+
+
+
+                </div>
+
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <div class="card" style="border-radius: 20px;">
+                <div class="container mt-2">
+
+              
+                 <div class="row">
+                  <div class="col-6">
+                    <i class="fab fa-facebook-square  ml-2 mt-2" style="font-size: 4rem;" ></i>
+                  </div>
+                  <div class="col-6">
+                      @if (Auth::user()->yftsocial->furl != null)
+                      <h6 class="ml-4 mt-4"><b>{{Auth::user()->yftsocial->furl}}</b></h6>
+                      <h6 style="color: grey" class="mt-3 cdes"><b>(Facebook Insights will be available very soon)</b></h6>
+                      @else
+                      <h6 class="ml-4 mt-4" style="color: black"><b>-</b></h6>
+                      @endif
+               
+                   
+                 
+                  </div>
+                </div>
+
+                <div class="mt-4 mb-3  row">
+                    <div class="col-12 col-md-12">
+                        <h6 style="color: #6aa3d8"><a href="/socialaccounts"><b>Update your Facebook Account Info</b></a></h6> 
+
+                    </div>
+
+                </div>
+            
+
+            </div>
+              </div>
+
+
+              <div class="card mt-4 mb-5" style="border-radius: 20px;">
+                <div class="container mt-2">
+
+              
+                 <div class="row">
+                  <div class="col-6">
+                    <i class="fab fa-youtube  ml-2 mt-2" style="font-size: 4rem;" ></i>
+                  </div>
+                  <div class="col-6">
+                    @if (Auth::user()->yftsocial->yurl != null)
+                    <h6 class="ml-4 mt-4"><b>{{Auth::user()->yftsocial->yurl}}</b></h6>
+                    <h6 style="color: grey" class="mt-3 cdes"><b>(Youtube Insights will be available very soon)</b></h6>
+                    @else
+                    <h6 class="ml-4 mt-4" style="color: black"><b>-</b></h6>
+                    @endif
+                   
+                  
+                  </div>
+                </div>
+
+                <div class="mt-4 mb-3  row">
+                    <div class="col-12 col-md-12">
+                        <h6 style="color: #6aa3d8"><a href="/socialaccounts"><b>Update your Youtube Account Info</b></a></h6> 
+
+                    </div>
+
+                </div>
+            
+
+            </div>
+              </div>
+
+
+            
+
+          
+      </div>
+
+     
+
+
+    
+
+    {{-- <hr>
 
     <h2 class="mt-2">Other Opportunities</h2>
     @if($otheropp->count()>0)
@@ -159,7 +425,7 @@
          
                    <h3 class="card-title ">{{$row->otitle}}</h3>
                
-                  <div class="card-text" style="height: 130px">
+                  <div class="card-text" style="height: 270px">
                             {{$row->odes}}
                      </div>
                       </div>
@@ -193,7 +459,7 @@
 
 
 
-     @endif
+     @endif --}}
 
     
 
@@ -207,4 +473,8 @@
 
 
 </div>
+
+
+
+
 @endsection

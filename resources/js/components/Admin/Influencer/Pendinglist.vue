@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid px-2 align-middle">
+  <div class="container-fluid px-1 align-middle">
      <!-- <h2 class="mt-2">Pending Influencers List </h2>
 
       <div class="float-right mt-2">
@@ -72,132 +72,32 @@
 
    
  
-    <table class="table mt-3 table-responsive-sm">
+   <table class="table mt-4 table-responsive">
       <thead>
-        <tr class="text-center">
-            <th>
+        <tr class="text-center" >
+            <th >
             Date of Joining
-            <!-- <span class="fa fa-stack" v-if="ord.created == 0">
-              <i
-                v-on:click="orderBy('created', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-              <i
-                v-on:click="orderBy('created', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else-if="ord.created == 1">
-              <i
-                v-on:click="orderBy('created', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else>
-              <i
-                v-on:click="orderBy('created', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span> -->
+          
           </th>
-          <th>
+          <th >
             UID
-            <!-- <span class="fa fa-stack" v-if="ord.id == 0">
-              <i
-                v-on:click="orderBy('id', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-              <i
-                v-on:click="orderBy('id', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else-if="ord.id == 1">
-              <i
-                v-on:click="orderBy('id', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else>
-              <i
-                v-on:click="orderBy('id', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span> -->
+
           </th>
        
        
-          <th>
+          <th >
             Name
-            <!-- <span class="fa fa-stack" v-if="ord.name == 0">
-              <i
-                v-on:click="orderBy('name', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-              <i
-                v-on:click="orderBy('name', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else-if="ord.name == 1">
-              <i
-                v-on:click="orderBy('name', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else>
-              <i
-                v-on:click="orderBy('name', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span> -->
+          
           </th>
-           <th>
+           <th >
             Category
-          </th>
+          </th >
           <th>
             City
           </th>
             <th>
             Email
-            <!-- <span class="fa fa-stack" v-if="ord.email == 0">
-              <i
-                v-on:click="orderBy('email', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-              <i
-                v-on:click="orderBy('email', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else-if="ord.email == 1">
-              <i
-                v-on:click="orderBy('email', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else>
-              <i
-                v-on:click="orderBy('email', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span> -->
+           
           </th>
         <th>
           Phone
@@ -207,46 +107,24 @@
 
           <th>
             Status
-            <!-- <span class="fa fa-stack" v-if="ord.status == 0">
-              <i
-                v-on:click="orderBy('profilestatus', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-              <i
-                v-on:click="orderBy('profilestatus', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else-if="ord.status == 1">
-              <i
-                v-on:click="orderBy('profilestatus', 2)"
-                class="fa fa-caret-down"
-                aria-hidden="true"
-              ></i>
-            </span>
-            <span v-else>
-              <i
-                v-on:click="orderBy('profilestatus', 1)"
-                class="fa fa-caret-up"
-                aria-hidden="true"
-              ></i>
-            </span> -->
+        
           </th>
           <th>
             Verified
           </th>
-           <th>
+            <th>
+            Instagram Followers
+          </th>
+           <th >
             Audience Location
           </th>
-          <th>
+          <th >
             Audience Age
           </th>
           <th>
             Audience Gender
           </th>
-           <th width="11%">
+           <th >
             Action
           </th>
         
@@ -257,10 +135,10 @@
         <tr
           v-if="user.data.length > 0"
           v-for="item, index in user.data"
-          class="text-center align-middle" :key="index+'124'"
+          class="text-center align-middle " :key="index+'124'"
         >
-            <td class="align-middle">
-           {{ item.created_at | moment('MMMM Do YYYY, h:mm') }}
+            <td class="align-middle ">
+           {{ item.created_at | moment('MMMM Do YYYY, h:mm a') }}
           </td>
           <td class="align-middle">
             <a :href="'/admin/influencer/edit/' + item.id">{{ item.id }}</a>
@@ -296,6 +174,9 @@
         
           </td>
            <td class="align-middle" v-for="row in item.instagrams">
+           {{row.ifollowers}} 
+          </td>
+           <td class="align-middle" v-for="row in item.instagrams">
            {{row.iaudienceloc}} 
           </td>
            <td class="align-middle" v-for="row in item.instagrams">
@@ -304,7 +185,7 @@
            <td class="align-middle" v-for="row in item.instagrams">
            {{row.iaudiencegen}} 
           </td>
-          <td>
+          <td  class="align-middle" >
               <select
                   value=""
                   id="ratecreator"
@@ -541,6 +422,7 @@ export default {
 .fa-stack {
   text-align: center;
 }
+ 
 
 .fa-stack .fa-caret-down {
   position: absolute;

@@ -81,26 +81,25 @@
                 </div>
           </div>
           <!-- end col -->
-          <div class="col-sm-2">
-              <div class="card-box tilebox-one">
-                  <h6 class="text-muted text-uppercase mt-0">MOU Sent</h6>
-                
-                  <h2 class="" data-plugin="counterup"> {{count($mousent)}}  </h2>
-             
-                </div>
-          </div>
-          <!-- end col -->
-          <div class="col-sm-2">
-              <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
-                  <h6 class="text-muted text-uppercase mt-0">MOU Accepted</h6>
-                  <h2 class="" data-plugin="counterup">{{count($mouacc)}}</h2></div>
-          </div>
+       
           <div class="col-sm-2">
             <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
                 <h6 class="text-muted text-uppercase mt-0">Campaign Details Sent</h6>
                 <h2 class="" data-plugin="counterup">{{count($cds)}}</h2>
               </div>
         </div>
+        <div class="col-sm-2">
+          <div class="card-box tilebox-one">
+              <h6 class="text-muted text-uppercase mt-0">Product Ordered</h6>        
+              <h2 class="" data-plugin="counterup"> {{count($proo)}}</h2>
+            </div>
+      </div>
+      <!-- end col -->
+      <div class="col-sm-2">
+          <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
+              <h6 class="text-muted text-uppercase mt-0">Product Received</h6>
+              <h2 class="" data-plugin="counterup">{{count($pror)}}</h2></div>
+      </div>
         
       <div class="col-sm-2">
         <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
@@ -132,6 +131,13 @@
             <h2 class="" data-plugin="counterup">{{count($cd)}}</h2>
           </div>
       </div>
+      <div class="col-sm-2 mt-2">
+        <div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
+            <h6 class="text-muted text-uppercase mt-0">Campaign Budget</h6>
+            <h2 class="" data-plugin="counterup">Rs.{{$csum}}</h2>
+          </div>
+      </div>
+
           <!-- end col -->
       </div>
 

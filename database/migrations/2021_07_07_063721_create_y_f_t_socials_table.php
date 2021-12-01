@@ -18,10 +18,19 @@ class CreateYFTSocialsTable extends Migration
             $table->integer('iid')->unsigned();
             $table->longText('yurl')->nullable();
             $table->longText('furl')->nullable();
+  
             $table->string('tusername')->nullable();
+            // $table->longText('ycname')->nullable();
+       
+            // $table->longText('fbname')->nullable();
+          
             $table->integer('yurlstatus')->default(0);//00 pending 1 active 2 rejected
             $table->integer('furlstatus')->default(0);//00 pending 1 active 2 rejected
             $table->integer('tusernamestatus')->default(0);//00 pending 1 active 2 rejected
+
+            
+        
+
             
             $table->timestamps();
         });

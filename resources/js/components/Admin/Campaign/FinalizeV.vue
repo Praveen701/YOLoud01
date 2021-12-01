@@ -1,7 +1,7 @@
 <template>
   <div>
 
-               <table  class="table mt-3 table-responsive-sm">
+               <table  class="table mt-3 table-responsive">
      <thead>
        <tr class="text-center">
               <th>UID</th>
@@ -26,7 +26,7 @@
                  
              <th>Current Status</th>
              <th>View Post</th>
-             <th>Product </th>
+             <th>Order Details </th>
              <th>Update Post Insights</th>
               <th>Rate Creator</th>
               
@@ -76,21 +76,23 @@
 
          </td>
          <td class="align-middle">
-       {{item.commercial}} 
+           {{item.commercial}} 
          </td>
+         
          <td class="align-middle">
 
                 
                        <select
-                              value=""
+                             
                               id="ratecreator"
                               v-model="item.status"
                               v-on:change="changestatus(item)"
+                              
                               class="form-control form-control-sm"
                             >
-                              <option value="2">Finalized</option>
-                              <option value="6">MOU Sent</option>
-                              <option value="7">MOU Accepted</option>
+                              <option value="7">Finalized</option>
+                              <!-- <option value="6">MOU Sent</option>
+                              <option value="7">MOU Accepted</option> -->
                               <option value="8">Campaign Details Sent</option>
                               <option value="14">Product Ordered</option>
                               <option value="15">Product Received</option>
@@ -660,6 +662,8 @@
             // },
              changestatus(item)
             {
+              if(confirm("Do you really want to change status?")){
+                
               axios.post('/admin/campaign/changestatus/'+item.id,{
                 status:item.status
               })
@@ -672,6 +676,7 @@
               .catch(err => {
                 console.error(err); 
               })
+              }
              
             },
        
